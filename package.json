@@ -1,0 +1,29 @@
+{
+  "name": "ExampleProject",
+  "version": "0.0.1",
+  "description": "Example project with Reason as a dependency",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reasonml/ExampleProject.git"
+  },
+  "keywords": [
+    "reason",
+    "example"
+  ],
+  "author": "jordwalke",
+  "license": "MIT",
+  "homepage": "https://github.com/reasonml/ExampleProject",
+  "dependencies": {
+    "reason": "https://github.com/facebook/reason.git#8e37c84bdb4e47683b81e88769bbdd217f26572f",
+    "ocaml-findlib": "https://github.com/npm-ml/ocaml-findlib.git#npm-1.6.1",
+    "ocaml": "https://github.com/npm-ml/ocaml.git#npm-4.02.3",
+    "dependency-env": "https://github.com/npm-ml/dependency-env.git"
+  },
+  "scripts": {
+    "test": ". dependencyEnv && which refmt",
+    "whereisreason": ". dependencyEnv && which refmt",
+    "rebuild": ". dependencyEnv && rebuild -I src ./src/Test.native 2>&1 | refmterr",
+    "clean": ". dependencyEnv && ocamlbuild -clean"
+  }
+}
+
