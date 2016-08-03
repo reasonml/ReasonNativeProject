@@ -34,19 +34,30 @@ npm run test
 
 
 ### How to customize
-- To change how this project is built, change the `postinstall` script. You're
-  guaranteed that the `postinstall` script executes *after* all of your
-  dependencies' `postinstall` steps.
-- You can add new scripts in the `package.json` `scripts` field. Name them
-  whatever you want.  Once added, you can then do `npm run scriptName` from
-  within the project root.
-- `dependency-env` is used to create sandboxed environment variables that are
-  only temporarily modified while running `scripts`. Your dependencies export
-  environment variables (or augment the `PATH` variable) with locations to
-  their binaries. That is why inside of every script, you'll see `.
-  dependencyEnv && rest-of-the-command`. `. dependencyEnv` sources (via the
-  `.`) a file that will set up all your environment variables for the duration
-  of running the rest of the command.
+- `npm` allows `scripts` to be specified in your project's `package.json`.
+  These `scripts` are a named set of commands.
+- A few scripts have special meaning, such as the `postinstall` script. The
+  `postinstall` script is how your project compiles itself. It is guaranteed
+  that the `postinstall` script executes any time you run `npm install` in this
+  package, or any time another package installs you as a dependency. You're
+  also guaranteed that your `postinstall` script is executed *after* all of
+  your dependencies' `postinstall` scripts.
+- You can add new named scripts in the `package.json` `scripts` field. Once
+  added, you can then run them via `npm run scriptName` from within the project
+  root.
+- `. dependencyEnv` is commonly used in these `scripts`. The dot `.` sources
+  `dependencyEnv` which manages the environment, and ensure that important
+  binaries (such as `refmt`) are in the `PATH`. `dependencyEnv` ensures that
+  the environment is augmented only for the duration of that `script` running,
+  and only in ways that you or your immediate dependencies decide. When
+  the entire purpose of developer tools is to generate a binary (such as a
+  compiler) to be included in your `PATH`, or produce a library whose path
+  should be specified in an special environment variable, it's almost like the
+  environment variable is the public API of that package. `dependencyEnv`
+  allows your script to see the environment variables that your immediate
+  dependencies wanted to publish as their public API. You can learn how
+  packages can publish environment variables in the [dependency-env
+  repo](https://github.com/npm-ml/dependency-env).
 
 ### Recompiling
 - To recompile this package (but not your dependencies), remove the local build
