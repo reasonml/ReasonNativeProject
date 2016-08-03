@@ -20,9 +20,9 @@
     "dependency-env": "https://github.com/npm-ml/dependency-env.git"
   },
   "scripts": {
-    "test": ". dependencyEnv && which refmt",
     "whereisreason": ". dependencyEnv && which refmt",
-    "rebuild": ". dependencyEnv && rebuild -I src ./src/Test.native 2>&1 | refmterr",
+    "postinstall": ". dependencyEnv && ocamlc -pp refmt -impl ./src/Test.re -o ./Test.exe 2>&1 | refmterr",
+    "test": ". dependencyEnv && ./Test.exe",
     "clean": ". dependencyEnv && ocamlbuild -clean"
   }
 }
