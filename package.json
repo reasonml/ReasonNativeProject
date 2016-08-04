@@ -14,16 +14,17 @@
   "license": "MIT",
   "homepage": "https://github.com/reasonml/ExampleProject",
   "dependencies": {
-    "reason": "https://github.com/facebook/reason.git#8e37c84bdb4e47683b81e88769bbdd217f26572f",
+    "reason": "https://github.com/facebook/reason.git#772c25a424ef92841caea9cf8ff1308517aec5e6",
     "ocaml-findlib": "https://github.com/npm-ml/ocaml-findlib.git#npm-1.6.1",
     "ocaml": "https://github.com/npm-ml/ocaml.git#npm-4.02.3",
     "dependency-env": "https://github.com/npm-ml/dependency-env.git"
   },
   "scripts": {
-    "whereisreason": ". dependencyEnv && which refmt",
-    "postinstall": ". dependencyEnv && ocamlc -pp refmt -impl ./src/Test.re -o ./Test.exe 2>&1 | refmterr",
-    "test": ". dependencyEnv && ./Test.exe",
-    "clean": ". dependencyEnv && ocamlbuild -clean"
+    "whereisocaml": "eval $(dependencyEnv) && which ocamlopt",
+    "whereisreason": "eval $(dependencyEnv) && which refmt",
+    "postinstall": "eval $(dependencyEnv) && ocamlc -pp refmt -impl ./src/Test.re -o ./Test.exe 2>&1 | refmterr",
+    "test": "eval $(dependencyEnv) && ./Test.exe",
+    "clean": "eval $(dependencyEnv) && ocamlbuild -clean"
   }
 }
 
