@@ -17,6 +17,9 @@ npm install
 npm run test
 ```
 
+If you are running as `root` already (you probably aren't) then invoke `npm
+install --unsafe-perm` instead.
+
 
 ### What's happening
 - `npm install` will download and install all your dependencies, and run the
@@ -73,6 +76,9 @@ npm run test
 - Check to make sure everything is installed correctly. There's a `script`
   already setup that will help you test the location of where `Reason` has been
   compiled into.
+
+- If something goes wrong, try deleting the local `node_modules` directory that
+  was installed, and then try reinstalling using `npm install -f`.
 
 ```
 npm run whereisreason
