@@ -24,7 +24,8 @@
     "whereisreason": "eval $(dependencyEnv) && which refmt",
     "postinstall": "eval $(dependencyEnv) && ocamlc -pp refmt -impl ./src/Test.re -o ./Test.exe 2>&1 | refmterr",
     "test": "eval $(dependencyEnv) && ./Test.exe",
-    "clean": "eval $(dependencyEnv) && ocamlbuild -clean"
+    "clean": "eval $(dependencyEnv) && ocamlbuild -clean",
+    "postinstallWithRebuild": "eval $(dependencyEnv) && rebuild ./src/Test.native 2>&1 | refmterr"
   }
 }
 
