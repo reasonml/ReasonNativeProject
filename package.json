@@ -14,7 +14,7 @@
   "license": "MIT",
   "homepage": "https://github.com/reasonml/ExampleProject",
   "dependencies": {
-    "reason": "https://github.com/facebook/reason.git#772c25a424ef92841caea9cf8ff1308517aec5e6",
+    "reason": "https://github.com/facebook/reason.git#9fda21e2dcd4b1b105efc453bea0bd4fc113117d",
     "ocaml-findlib": "https://github.com/npm-ml/ocaml-findlib.git#npm-1.6.1",
     "ocaml": "https://github.com/npm-ml/ocaml.git#npm-4.02.3",
     "dependency-env": "https://github.com/npm-ml/dependency-env.git"
@@ -23,6 +23,7 @@
     "whereisocaml": "eval $(dependencyEnv) && which ocamlopt",
     "whereisreason": "eval $(dependencyEnv) && which refmt",
     "postinstall": "eval $(dependencyEnv) && ocamlc -pp refmt -impl ./src/Test.re -o ./Test.exe 2>&1 | refmterr",
+    "tryOutRebuild": "eval $(dependencyEnv) && rebuild -I src ./src/Test.native 2>&1 | refmterr",
     "test": "eval $(dependencyEnv) && ./Test.exe",
     "clean": "eval $(dependencyEnv) && ocamlbuild -clean",
     "postinstallWithRebuild": "eval $(dependencyEnv) && rebuild ./src/Test.native 2>&1 | refmterr"
