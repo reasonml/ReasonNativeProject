@@ -10,7 +10,7 @@ Example project using Reason as an `npm` dependency.
 
 ## Get Started:
 
-```
+```sh
 git clone https://github.com/reasonml/ExampleProject.git
 cd ExampleProject
 npm install
@@ -19,6 +19,33 @@ npm run test
 
 If you are running as `root` already (you probably aren't) then invoke `npm
 install --unsafe-perm` instead.
+
+## Included Top Level
+
+The top level `rtop` is built in to the sandbox: 
+
+```sh
+# Opens `rtop` from the sandbox.
+npm run top
+```
+
+## Editor Support
+
+All of the IDE support, including error highlighting, autocomplete, and
+syntax is included inside of the sandbox. 
+
+```sh
+# Opens your `$EDITOR` with all the right tools in your `$PATH`
+npm run editor
+```
+
+To make your editor load the IDE support from the sandbox:
+
+- Make sure your `$EDITOR` variable is set if not already.
+  - `export EDITOR=vim`, or `export EDITOR=atom`
+- Configure your `EDITOR` to load the `Reason` plugins. See the instructions
+  for [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
+  [Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
 
 
 ### What's happening
