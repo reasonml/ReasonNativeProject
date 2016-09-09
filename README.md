@@ -14,7 +14,7 @@ Example project using Reason as an `npm` dependency.
 git clone https://github.com/reasonml/ExampleProject.git
 cd ExampleProject
 npm install
-npm run test
+npm start
 ```
 
 If you are running as `root` already (you probably aren't) then invoke `npm
@@ -52,8 +52,8 @@ To make your editor load the IDE support from the sandbox:
 - `npm install` will download and install all your dependencies, and run the
   `postinstall` steps for all of those dependencies, and then finally the
   `postinstall` script step of this project.
-- `npm run test` will run the script located in the `test` field of the
-  `scripts` section of the `package.json` file here. The `test` script simply
+- `npm start` will run the script located in the `start` field of the
+  `scripts` section of the `package.json` file here. The `start` script simply
   runs the binary that was built in the `postinstall` step.
 - No, really - all you need is `npm` (> `3.0`). All of the compiler infrastructure
   has been organized into `npm` packages, and will be compiled on your host
