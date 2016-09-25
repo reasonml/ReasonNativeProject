@@ -1,5 +1,7 @@
 # ExampleProject
 
+[![Build Status](https://travis-ci.org/reasonml/ExampleProject.svg?branch=master)](https://travis-ci.org/reasonml/ExampleProject)
+
 ## Reason via `npm`
 
 Example project using Reason as an `npm` dependency.
