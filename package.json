@@ -44,6 +44,9 @@
     "@opam-alpha/merlin": "^ 2.5.0",
     "nopam": "https://github.com/yunxing/nopam.git",
     "dependency-env": "https://github.com/npm-ml/dependency-env.git"
+  },
+  "engines" : {
+    "npm" : ">=3.10.0"
   }
 }
 
