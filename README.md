@@ -49,6 +49,11 @@ To make your editor load the IDE support from the sandbox:
   for [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
   [Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
 
+> Note: If you use `atom`, and already have `opam` installed, then there's a
+known issue where `atom` has problems loading, but you can fix it easily
+by commenting out any part in your `bashrc` that sources opam environments.
+We will come up with a long term solution at some point.
+
 
 ### What's happening
 - `npm install` will download and install all your dependencies, and run the
