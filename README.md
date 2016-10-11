@@ -1,14 +1,44 @@
 # ExampleProject
 
 [![Build Status](https://travis-ci.org/reasonml/ExampleProject.svg?branch=master)](https://travis-ci.org/reasonml/ExampleProject)
-
-## Reason via `npm`
-
-Example project using Reason as an `npm` dependency.
-
 > Note: This example will be rapidly changing. It is not officially supported
 > yet. Always reclone the repo each time you try it out (rebasing is not
 > sufficient).
+
+# Reason via `yarn`
+
+Example project using Reason as an `yarn` dependency.
+
+## Install yarn:
+
+yarn is a fast, reliable, and secure dependency management tool. You can now use yarn to install reason.
+
+```
+npm install -g yarnpkg
+```
+
+## Get started: 
+```sh
+git clone https://github.com/reasonml/ExampleProject.git
+cd ExampleProject
+yarn cache clean # need to clean every time before installation, see https://github.com/yarnpkg/yarn/issues/480
+yarn install
+yarn reasonbuild
+yarn start
+```
+
+## Included Top Level
+
+The top level `rtop` is built in to the sandbox: 
+
+```sh
+# Opens `rtop` from the sandbox.
+yarn top
+```
+
+# Reason via `npm`
+
+Example project using Reason as an `npm` dependency.
 
 ## Get Started:
 
@@ -31,11 +61,16 @@ The top level `rtop` is built in to the sandbox:
 npm run top
 ```
 
-## Editor Support
+# Editor Support
 
 All of the IDE support, including error highlighting, autocomplete, and
 syntax is included inside of the sandbox. 
 
+```sh
+# Opens your `$EDITOR` with all the right tools in your `$PATH`
+yarn editor
+```
+or
 ```sh
 # Opens your `$EDITOR` with all the right tools in your `$PATH`
 npm run editor
@@ -56,13 +91,13 @@ We will come up with a long term solution at some point.
 
 
 ### What's happening
-- `npm install` will download and install all your dependencies, and run the
+- `npm install` / `yarn install` will download and install all your dependencies, and run the
   `postinstall` steps for all of those dependencies, and then finally the
   `postinstall` script step of this project.
-- `npm start` will run the script located in the `start` field of the
+- `npm start` / `yarn start` will run the script located in the `start` field of the
   `scripts` section of the `package.json` file here. The `start` script simply
   runs the binary that was built in the `postinstall` step.
-- No, really - all you need is `npm` (> `3.0`). All of the compiler infrastructure
+- No, really - all you need is `npm` (> `3.0`) or yarn. All of the compiler infrastructure
   has been organized into `npm` packages, and will be compiled on your host
   inside of the `./node_modules` directory. No `PATH`s are poluted. No global
   environment variables destroyed. No trace is left on your system. If you
@@ -71,11 +106,11 @@ We will come up with a long term solution at some point.
 
 
 ### How to customize
-- `npm` allows `scripts` to be specified in your project's `package.json`.
+- `npm` / `yarn` allows `scripts` to be specified in your project's `package.json`.
   These `scripts` are a named set of commands.
 - A few scripts have special meaning, such as the `postinstall` script. The
   `postinstall` script is how your project compiles itself. It is guaranteed
-  that the `postinstall` script executes any time you run `npm install` in this
+  that the `postinstall` script executes any time you run `npm install` / `yarn install` in this
   package, or any time another package installs you as a dependency. You're
   also guaranteed that your `postinstall` script is executed *after* all of
   your dependencies' `postinstall` scripts.
@@ -99,7 +134,7 @@ We will come up with a long term solution at some point.
 ### Recompiling
 - To recompile this package (but not your dependencies), remove the local build
   artifacts for this package (usually just the `_build` directory) and then run
-  `npm run postinstall`.
+  `yarn postinstall` or `npm run postinstall`.
 
 ### How to turn this project into a library
 
@@ -112,7 +147,9 @@ We will come up with a long term solution at some point.
   compiled into.
 
 - If something goes wrong, try deleting the local `node_modules` directory that
-  was installed, and then try reinstalling using `npm install -f`.
+  was installed, and then try reinstalling using `npm install -f`. 
+  
+- For yarn, also delete `~/.yarn` and `./yarn.lock` to remove build cache. 
 
 ```
 npm run whereisreason
