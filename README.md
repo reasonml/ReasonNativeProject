@@ -145,15 +145,16 @@ We will come up with a long term solution at some point.
 - Check to make sure everything is installed correctly. There's a `script`
   already setup that will help you test the location of where `Reason` has been
   compiled into.
+  
+```
+npm run whereisreason
+```
+
 
 - If something goes wrong, try deleting the local `node_modules` directory that
   was installed, and then try reinstalling using `npm install -f`. 
   
 - For yarn, also delete `~/.yarn` and `./yarn.lock` to remove build cache. 
-
-```
-npm run whereisreason
-```
 
 ### TODO:
 
