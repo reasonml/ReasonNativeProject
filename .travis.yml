@@ -3,3 +3,9 @@ node_js:
   - "6"
   - "6.1"
   - "5.11"
+os:
+  - linux
+  - osx
+install:
+  - npm install yarn -g
+  - yarn install
