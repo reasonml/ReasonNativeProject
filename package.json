@@ -40,7 +40,7 @@
 
   },
   "dependencies": {
-    "reason": "^ 1.3.2",
+    "reason": "^ 1.4.0",
     "@opam-alpha/merlin": "^ 2.5.0",
     "@opam-alpha/ocaml": "4.2.3",
     "nopam": "https://github.com/yunxing/nopam.git",
@@ -50,4 +50,3 @@
     "npm" : ">=3.10.0"
   }
 }
-
