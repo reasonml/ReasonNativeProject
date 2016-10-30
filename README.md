@@ -115,7 +115,7 @@ We will come up with a long term solution at some point.
   was installed, and then try reinstalling using `npm install -f`.
 
 ```
-npm run whereisreason
+npm run whereisocamlmerlin
 ```
 
 ### TODO:
