@@ -105,6 +105,130 @@ We will come up with a long term solution at some point.
 
 - To turn this example project into a library that other people can depend on
   via `npm`... (coming soon).
+  
+
+### Debugging a Failed Dependency Install
+
+When `npm install` fails to install one of your dependencies successfully, it's
+typically because a `postinstall` step of a package has failed. Read
+the logs to determine which one is failing. `npm` will delete the directory
+of the failed package so it won't be in `node_modules`, but it's in the cache, so you
+can usually install it explicitly, and debug the installation. Suppose the
+`@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
+we can debug it.
+
+Let's see what an `npm install` for this package *would* install. The `--dry-run`
+flag avoids actually installing anything.
+
+```sh
+npm install --dry-run @opam-alpha/qcheck 
+```
+
+In my project, it says it would only need to install the following packages.
+That's because all of the other ones must have already been installed in
+`node_modules`.
+
+Output:
+```sh
+test@1.0.0 /Users/jwalke/Desktop/tmp
+└─┬ @opam-alpha/qcheck@0.4.0 
+  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
+```
+(Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
+package. That's okay).
+
+So we want to install that now, but *without* executing the install scripts so we
+pass the `--ignore-scripts` flag. Without that flag, it would fail when running
+the scripts again, and then remove the package again!
+
+```sh
+npm install --ignore-scripts @opam-alpha/qcheck@0.4.0
+```
+
+This will just install the source code, and let us know what it actually installed.
+
+Ouput:
+```
+test@1.0.0 /Users/jwalke/Desktop/tmp
+└─┬ @opam-alpha/qcheck@0.4.0 
+  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
+```
+
+Now, make sure `npm` didn't do something weird with installing new versions of package
+that didn't show up in the dry run, and make sure it installed things
+as flat as possible in `node_modules`, as opposed to nesting `node_modules`
+for compiled ocaml packages inside of other `node_modules`. Ideally, everything
+is a flat list inside the `ExampleProject/node_modules` directory.
+
+`cd` into the package that was failing to build correctly (it was actually the `qcheck-actual` package
+in our case). Run the build command in `package.json`'s `postinstall` field by doing `npm run postinstall`.
+
+```sh
+cd node_modules/qcheck-actual
+npm run postinstall
+```
+
+Now the package should fail as it did when you tried to install your top level project,
+but without removig the packages, so you can debug the issue, fix it, then try rebuilding
+again. Usually you need to reconfigure the problematic package, or fix the build script.
+Fix it, and push an update for the package.
+
+Finally, once you've pushed a fix to the package for the issue, `rm`
+the entire project's `node_modules` directory and re-run `npm install`
+from the top again. This just makes sure you've got everything
+nice and clean as if you installed it for the first time.
+
+
+### Adding Packages
+
+###### Easy
+Just add the new dependency in your `package.json` file, `rm` the `node_modules`
+directory and re-run `npm install`.
+
+###### Fast
+Adding individual packages using the "easy" way above, unfortunately causes the
+entire universe to rebuild. If you have several minutes, go for that
+approach because it is very reliable. But if you know that rebuilding your
+whole project is very slow, and you are pretty sure that the exact package
+you want to add will not cause version conflicts, just manually add the
+individual packages.
+
+Do a dry run to see which packages will be added:
+
+```sh
+npm install --dry-run @opam-alpha/qcheck 
+
+
+> test@1.0.0 /Users/jwalke/Desktop/tmp
+> └─┬ @opam-alpha/qcheck@0.4.0 
+>   └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
+
+```
+
+Then install the package, without running the build scripts (recall you want to run them
+manually so that it doesn't rebuild the whole world) then first download all the new
+dependencies (by running `npm install --ignore-scripts`) and pass the `--save` flag
+so that it updates your project's `package.json` dependencies. 
+
+```sh
+npm install --ignore-scripts --save myPackageToAdd
+cd node_modules/myPackagetoAdd
+npm run postinstall
+```
+It will report all of the newly downloaded dependencies. Then, `cd` into each
+newly downloaded dependency, and run `npm run postinstall` in the right order.
+(Take note of what the
+result of `npm install` command outputs - those are the new packages you need to
+run `npm run postinstall` for).
+
+Again, this manual approach is only for when you
+are adding one small new dependency that you know won't bring in a bunch of
+other dependencies. For bigger changes, you should be using the Easy approach above.
+
+Now that dependency is installed. If it is a findlib package, your build commands
+will be able to see them using `ocamlfind` etc (`rebuild` also uses `ocamlfind`
+when you supply the `-pkg findlibpackagename` flag).
+
 
 ### Troubleshooting:
 - Check to make sure everything is installed correctly. There's a `script`
