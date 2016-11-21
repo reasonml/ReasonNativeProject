@@ -169,7 +169,7 @@ npm run postinstall
 ```
 
 Now the package should fail as it did when you tried to install your top level project,
-but without removig the packages, so you can debug the issue, fix it, then try rebuilding
+but without removing the packages, so you can debug the issue, fix it, then try rebuilding
 again. Usually you need to reconfigure the problematic package, or fix the build script.
 Fix it, and push an update for the package.
 
