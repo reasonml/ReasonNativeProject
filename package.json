@@ -31,8 +31,7 @@
     "reasonbuild": "npm run reasonBuild",
 
     "start": "eval $(dependencyEnv) && ./_build/src/Test.native",
-
-    "clean": "eval $(dependencyEnv) && nopam && rebuild -clean",
+    "clean": "rm -r ./_build",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
     "editor": "eval $(dependencyEnv) && eval $EDITOR",
