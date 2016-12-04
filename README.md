@@ -4,11 +4,8 @@
 
 ## Reason via `npm`
 
-Example project using Reason as an `npm` dependency.
-
-> Note: This example will be rapidly changing. It is not officially supported
-> yet. Always reclone the repo each time you try it out (rebasing is not
-> sufficient).
+Example project using Reason as an `npm` dependency. Use this as a template to
+quickly start a new project, or just try out `Reason`.
 
 ## Get Started:
 
@@ -17,6 +14,12 @@ git clone https://github.com/reasonml/ExampleProject.git
 cd ExampleProject
 npm install
 npm start
+```
+
+## Make Changes And Rebuild :
+```sh
+npm run reasonBuild
+npm run clean  # Clean if you need to!
 ```
 
 If you are running as `root` already (you probably aren't) then invoke `npm
@@ -55,6 +58,25 @@ by commenting out any part in your `bashrc` that sources opam environments.
 We will come up with a long term solution at some point.
 
 
+## Making It Your Project
+`ExampleProject` is meant to be the starting point of your own project.
+
+##### Add Another Dependency
+
+**Option `1`:** Install a dependency into the project sandbox, and use `--save`
+so that your `package.json` is updated.
+
+```sh
+npm install --save @opam-alpha/cstruct
+```
+
+**Option `2`:** Edit the `package.json` manually to include your new dependency and run `npm install`.
+
+> Note: Sometimes options `1` and `2` above fail because some *other* dependency that is
+rebuilt as a result of the `install` was not designed to build in an idempotent manner.
+In that case, just add the new dependency to your `package.json` `"dependencies"`,
+`rm -r node_modules`, and then run `npm install`. This installs from a clean slate.
+
 ### What's happening
 - `npm install` will download and install all your dependencies, and run the
   `postinstall` steps for all of those dependencies, and then finally the
@@ -70,7 +92,7 @@ We will come up with a long term solution at some point.
   started.
 
 
-### How to customize
+### Add Your Own Scripts
 - `npm` allows `scripts` to be specified in your project's `package.json`.
   These `scripts` are a named set of commands.
 - A few scripts have special meaning, such as the `postinstall` script. The
@@ -82,8 +104,8 @@ We will come up with a long term solution at some point.
 - You can add new named scripts in the `package.json` `scripts` field. Once
   added, you can then run them via `npm run scriptName` from within the project
   root.
-- `. dependencyEnv` is commonly used in these `scripts`. The dot `.` sources
-  `dependencyEnv` which manages the environment, and ensure that important
+- `eval $(dependencyEnv)` is commonly used in these `scripts`. The `eval`
+  manages the environment, and ensures that important
   binaries (such as `refmt`) are in the `PATH`. `dependencyEnv` ensures that
   the environment is augmented only for the duration of that `script` running,
   and only in ways that you or your immediate dependencies decide. When
@@ -96,10 +118,6 @@ We will come up with a long term solution at some point.
   packages can publish environment variables in the [dependency-env
   repo](https://github.com/npm-ml/dependency-env).
 
-### Recompiling
-- To recompile this package (but not your dependencies), remove the local build
-  artifacts for this package (usually just the `_build` directory) and then run
-  `npm run postinstall`.
 
 ### How to turn this project into a library
 
@@ -179,58 +197,7 @@ from the top again. This just makes sure you've got everything
 nice and clean as if you installed it for the first time.
 
 
-### Adding Packages
-
-###### Easy
-Just add the new dependency in your `package.json` file, `rm` the `node_modules`
-directory and re-run `npm install`.
-
-###### Fast
-Adding individual packages using the "easy" way above, unfortunately causes the
-entire universe to rebuild. If you have several minutes, go for that
-approach because it is very reliable. But if you know that rebuilding your
-whole project is very slow, and you are pretty sure that the exact package
-you want to add will not cause version conflicts, just manually add the
-individual packages.
-
-Do a dry run to see which packages will be added:
-
-```sh
-npm install --dry-run @opam-alpha/qcheck 
-
-
-> test@1.0.0 /Users/jwalke/Desktop/tmp
-> └─┬ @opam-alpha/qcheck@0.4.0 
->   └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
-
-```
-
-Then install the package, without running the build scripts (recall you want to run them
-manually so that it doesn't rebuild the whole world) then first download all the new
-dependencies (by running `npm install --ignore-scripts`) and pass the `--save` flag
-so that it updates your project's `package.json` dependencies. 
-
-```sh
-npm install --ignore-scripts --save myPackageToAdd
-cd node_modules/myPackagetoAdd
-npm run postinstall
-```
-It will report all of the newly downloaded dependencies. Then, `cd` into each
-newly downloaded dependency, and run `npm run postinstall` in the right order.
-(Take note of what the
-result of `npm install` command outputs - those are the new packages you need to
-run `npm run postinstall` for).
-
-Again, this manual approach is only for when you
-are adding one small new dependency that you know won't bring in a bunch of
-other dependencies. For bigger changes, you should be using the Easy approach above.
-
-Now that dependency is installed. If it is a findlib package, your build commands
-will be able to see them using `ocamlfind` etc (`rebuild` also uses `ocamlfind`
-when you supply the `-pkg findlibpackagename` flag).
-
-
-### Troubleshooting:
+## Troubleshooting:
 - Check to make sure everything is installed correctly. There's a `script`
   already setup that will help you test the location of where `Reason` has been
   compiled into.
@@ -242,7 +209,7 @@ when you supply the `-pkg findlibpackagename` flag).
 npm run whereisocamlmerlin
 ```
 
-### TODO:
+## TODO:
 
 - This also installs sandboxed IDE support for Vim/Atom/Emacs. We need to
   upgrade all of the plugins to automatically search for IDE plugins inside of
