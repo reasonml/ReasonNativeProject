@@ -59,7 +59,13 @@ We will come up with a long term solution at some point.
 
 
 ## Making It Your Project
-`ExampleProject` is meant to be the starting point of your own project.
+`ExampleProject` is meant to be the starting point of your own project. You'll want
+to make use of existing libraries in your app, so 
+browse the growing set of `opam` packages ported to `npm` under
+[`opam-alpha`](https://www.npmjs.com/~opam-alpha#packages). If there's something
+that hasn't yet been ported from `opam`, make a pull request to
+[this repo](https://github.com/yunxing/opam-npm/) and the package will automatically
+be ported (as soon as the daemon picks it up).
 
 ##### Add Another Dependency
 
@@ -76,6 +82,13 @@ npm install --save @opam-alpha/cstruct
 rebuilt as a result of the `install` was not designed to build in an idempotent manner.
 In that case, just add the new dependency to your `package.json` `"dependencies"`,
 `rm -r node_modules`, and then run `npm install`. This installs from a clean slate.
+
+
+> Note: `opam-alpha` is "alpha" - we may move to a new namespace `opam-beta`
+once we apply the lessons we've learned from `opam-alpha`. All the should exist
+as they are, but a next generation `opam-beta` universe on `npm` would have
+everything `opam-alpha` has (and then some). The work to upgrade your projects
+will likely be minimal.
 
 ### What's happening
 - `npm install` will download and install all your dependencies, and run the
