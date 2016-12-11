@@ -1,13 +1,16 @@
 # ReasonProject
 
-Reason project environment via `npm`.
+Installation of [`Reason`](http://facebook.github.io/reason/) project and
+development environments via `npm`.
 
-- Local sandboxed `Reason` projects.
-- Installation of `Reason` tools globally.
+> Requirements: `npm` (currently tested on Mac, Linux, and Windows Linux subsystem).
 
-Those two features may sound completely different, but the truth is that they
-are very similar, and therefore it makes sense to have `ReasonProject` handle
-both.
+`ReasonProject` installs the `Reason` toolchain into a local directory using
+`npm`.  `ReasonProject` can therefore be used as a template for new projects,
+but can also be used to install the toolchain [into the global
+environment](#reasonproject-editor-support).  `ReasonProject` includes: the
+compiler toolchain, the source formatter, REPL, and IDE support for popular
+editors.
 
 > A sandboxed environment models dependencies and builds them into a local
 > directory so that it works reliably for anyone. Installing tools into your
@@ -19,7 +22,7 @@ both.
 
 [![Build Status](https://travis-ci.org/reasonml/ReasonProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonProject)
 
-## Get Started:
+## Install
 
 Install by cloning the repo and running `npm install`. This installs all
 dependencies locally into the `ReasonProject` directory.
@@ -30,53 +33,70 @@ cd ReasonProject
 npm install
 ```
 
+## Project Commands
+
+Once built, `ReasonProject` generates an *environment* that you can temporarily
+load when executing commands. The environment contains an enhanced `PATH`
+containing binaries built by your dependencies, but this environment isn't
+loaded into your global path. Some `npm run` commands have been setup to allow
+you to run some basic tasks, as well as any custom command, all within the
+project environment.
+
+
+
 ### Run, Change, Rebuild
 
 There are a couple of built in commands declared in `package.json` that you can
 execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
 and `"npm run clean"`. You can also [add your
-own](#reasonproject-get-started-add-your-own-scripts) commands.
+own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+which give you a nicer alias like `npm run myScriptName`.
 
 
 ```sh
-npm run start        # Runs the compiled app
 npm run reasonBuild  # Rebuilds after changing
+npm run start        # Runs the compiled app
 npm run clean        # Clean if you need to!
 ```
+
+A single test file `./src/Test.re` is included. Make a simple change to it and
+then run the commands above to see it effect the output.
 
 
 ### REPL
 
-The `rtop` REPL is built into the sandbox, and the command `npm run top` which
-starts the REPL is predefined in `package.json`.
+The `rtop` REPL is built into the sandbox. The command `npm run top` starts the
+REPL.
 
 ```sh
 # Opens `rtop` from the sandbox.
 npm run top
 ```
 
-### Environment Commands
 
-Once built, `ReasonProject` generates an environment that you can temporarily
-load to execute commands within. The environment contains an enhanced `PATH`
-that contains binaries built by your dependencies, but this environment isn't
-loaded automatically. To temporarily load this environment, execute the
-predefined `npm run env --` command. You should pass the *actual* command you
-want to run after `--`.
+### Custom Commands
+
+To do anything beyond those basic, preconfigured commands, you just prefix your
+command with `npm run env --`. You should pass the *actual* command you want to
+run after `--`.
 
 ```sh
+# By default nothing is found!
+which refmt
 
-  npm run env -- which refmt
+ > Not Found!
 
-> ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt 
+# Prefix with "npm run env --" and it finds it!
+npm run env -- which refmt
 
+ > ~/ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt
 ```
 
-The previous command would likely fail if not prefixed with `npm run env --`
-because the dependencies are the ones that built `refmt` in this case.  `npm
-run env` makes all the things from our dependencies available.
+If this becomes tedious, you can [add your
+own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+so that you can do `npm run yourScriptName` instead.
 
-### Editor Support
+## Editor Support
 
 #### Prepare Your Editor
 
@@ -115,16 +135,16 @@ ensures that your editor will find the editor support in your environment
 variables.
 
 > Note: If you use `atom`, and already have `opam` installed, then there's a
-known issue where `atom` has problems loading, but you can fix it easily
-by commenting out any part in your `bashrc` that sources opam environments.
-We will come up with a long term solution at some point.
+> known issue where `atom` has problems loading, but you can fix it easily by
+> commenting out any part in your `bashrc` that sources opam environments.  We
+> will come up with a long term solution at some point.
 
-##### Just Using Global Paths
+##### Using Global Paths
 
 Pure sandboxed based development doesn't always work for certain workflows.
-Prefixing *all* commands with `npm run env` may not work well. In that case,
-you can easily inject your successfully built project's environment into the
-global `PATH`, by putting the following in your `.bashrc`:
+(prefixing *all* commands with `npm run` may not work well). In that case, you
+can easily inject your successfully built project's environment into the global
+`PATH`, by putting the following in your `.bashrc`:
 
 ```sh
 # In your .bashrc
@@ -134,15 +154,9 @@ pushd ~/pathTo/ReasonProject/ && \
 ```
 
 
-### Multiple Projects
+## Developing Your Project
 
-You can have multiple clones/forks/builds of `ReasonProject` for each of your
-projects. When you make changes, you can share the project easily with anyone
-else. It's common to have multiple `ReasonProject`s simultaneously. If also
-using global environment variables, it's wise to also have one special
-`ReasonProject`, that is only used for augmenting the global path.
-
-### Making It Your Project
+### Making It Yours
 `ReasonProject` is meant to be the starting point of your own project. You'll want
 to make use of existing libraries in your app, so 
 browse the growing set of `opam` packages ported to `npm` under
@@ -162,62 +176,94 @@ npm install --save @opam-alpha/cstruct
 
 **Option `2`:** Edit the `package.json` manually to include your new dependency and run `npm install`.
 
-> Note: Sometimes options `1` and `2` above fail because some *other* dependency that is
-rebuilt as a result of the `install` was not designed to build in an idempotent manner.
-In that case, just add the new dependency to your `package.json` `"dependencies"`,
-`rm -r node_modules`, and then run `npm install`. This installs from a clean slate.
+> Note: Sometimes options `1` and `2` above fail because some *other*
+> dependency that is rebuilt as a result of the `install` was not designed to
+> build in an idempotent manner.  In that case, just add the new dependency to
+> your `package.json` `"dependencies"`, `rm -r node_modules`, and then run `npm
+> install`. This installs from a clean slate.
 
 
 > Note: `opam-alpha` is "alpha" - we may move to a new namespace `opam-beta`
-once we apply the lessons we've learned from `opam-alpha`. All the should exist
-as they are, but a next generation `opam-beta` universe on `npm` would have
-everything `opam-alpha` has (and then some). The work to upgrade your projects
-will likely be minimal.
+> once we apply the lessons we've learned from `opam-alpha`. All the should
+> exist as they are, but a next generation `opam-beta` universe on `npm` would
+> have everything `opam-alpha` has (and then some). The work to upgrade your
+> projects will likely be minimal.
 
+
+This merely adds and builds the dependency. It doesn't mean your build system
+will know to link to it. Accomplishing that is build system dependent, but if
+using the example build system (`rebuild`, which is based on `ocamlbuild`), you
+can get an idea for the options by doing `npm run buildHelp`. Typically you
+need to configure the `reasonBuild` entry in `package.json` to add the `-pkg
+dependencyPackage`. Consult your dependency's docs.
 
 ### Add Your Own Scripts
-- `npm` allows `scripts` to be specified in your project's `package.json`.
-  These `scripts` are a named set of commands.
-- A few scripts have special meaning, such as the `postinstall` script. The
-  `postinstall` script is how your project compiles itself. It is guaranteed
-  that the `postinstall` script executes any time you run `npm install` in this
-  package, or any time another package installs you as a dependency. You're
-  also guaranteed that your `postinstall` script is executed *after* all of
-  your dependencies' `postinstall` scripts.
-- You can add new named scripts in the `package.json` `scripts` field. Once
-  added, you can then run them via `npm run scriptName` from within the project
-  root.
-- `eval $(dependencyEnv)` is commonly used in these `scripts`. The `eval`
-  manages the environment, and ensures that important
-  binaries (such as `refmt`) are in the `PATH`. `dependencyEnv` ensures that
-  the environment is augmented only for the duration of that `script` running,
-  and only in ways that you or your immediate dependencies decide. When
-  the entire purpose of developer tools is to generate a binary (such as a
-  compiler) to be included in your `PATH`, or produce a library whose path
-  should be specified in an special environment variable, it's almost like the
-  environment variable is the public API of that package. `dependencyEnv`
-  allows your script to see the environment variables that your immediate
-  dependencies wanted to publish as their public API. You can learn how
-  packages can publish environment variables in the [dependency-env
-  repo](https://github.com/npm-ml/dependency-env).
+
+`npm` allows `scripts` to be specified in your project's `package.json`.  These
+`scripts` are a named set of commands. A few scripts have special meaning, such
+as the `postinstall` script.
+
+> The `postinstall` script is how your project compiles itself. It is
+> guaranteed that the `postinstall` script executes any time you run `npm
+> install` in this package, or any time another package installs you as a
+> dependency. You're also guaranteed that your `postinstall` script is executed
+> *after* all of your dependencies' `postinstall` scripts.
+
+You can add new named scripts in the `package.json` `scripts` field. Once
+added, you can then run them via `npm run scriptName` from within the project
+root.
+
+###### Making Sure Your Scripts See The Environment
+
+`eval $(dependencyEnv)` is commonly used in these `scripts`. This `eval`
+statement augments the environment for the duration of the named script, which
+ensures that important binaries (such as `refmt`) are in the `PATH`.
+
+> When the entire purpose of developer tools is to generate a binary (such as a
+> compiler) to be included in your `PATH`, or produce a library whose path
+> should be specified in an special environment variable, it's almost like the
+> environment variable is the public API of that package.  `dependencyEnv`
+> allows your script to see the environment variables that your immediate
+> dependencies wanted to publish as their public API. You can learn how
+> packages can publish environment variables in the [dependency-env
+> repo](https://github.com/npm-ml/dependency-env).
+
+### Multiple Projects
+
+You can have multiple clones/forks/builds of `ReasonProject` - one for each of
+your projects. When you make changes, you can share the project easily with
+anyone else because you are modelling all dependencies via `package.json`. If
+also [using the global
+environment](#reasonproject-editor-support), you may want to
+designate one special `ReasonProject`, that is only used for augmenting the
+global path.
 
 
-### Creating Reusable Libraries
+### Creating Libraries
 
-- To turn this example project into a library that other people can depend on
-  via `npm`... (coming soon).
-  
+`ReasonProject` sets up your environment for building an application. We
+haven't yet mentioned how to then share your work with other people *as* an
+`npm` dependency itself. More coming soon.
 
-### Debugging Failed Dependencies
 
-When `npm install` fails to install one of your dependencies successfully, it's
-typically because a `postinstall` step of a package has failed. Read
-the logs to determine which one is failing. `npm` will delete the directory
-of the failed package so it won't be in `node_modules`, but it's in the cache, so you
-can usually install it explicitly, and debug the installation. Suppose the
+## Troubleshooting
+
+In general, if something goes wrong, try deleting the local `node_modules`
+directory that was installed, and then try reinstalling using `npm install -f`
+(to avoid using a stale cache). Then if that doesn't work, follow the following
+steps to debug your specific failed dependency.
+
+#### Debugging Failed Dependencies
+
+When `npm install` fails to install one of your dependencies, it's typically
+because a `postinstall` step of a package has failed. Read the logs to
+determine which one is failing. `npm` will delete the directory of the failed
+package so the failed install won't be in `node_modules`, but you can
+usually try to reinstall it explicitly, and debug the installation. Suppose the
 `@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
 we can debug it.
 
+#####Do a dry run:
 Let's see what an `npm install` for this package *would* install. The `--dry-run`
 flag avoids actually installing anything.
 
@@ -229,15 +275,16 @@ In my project, it says it would only need to install the following packages.
 That's because all of the other ones must have already been installed in
 `node_modules`.
 
-Output:
 ```sh
+# Output
 test@1.0.0 /Users/jwalke/Desktop/tmp
 └─┬ @opam-alpha/qcheck@0.4.0 
-  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git
+  └── qcheck-actual@0.4.0 (git://github.com/npm-opam/qcheck.git)
 ```
-(Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
-package. That's okay).
+> Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
+package. That's okay.
 
+###### Install Source Without Building
 So we want to install that now, but *without* executing the install scripts so we
 pass the `--ignore-scripts` flag. Without that flag, it would fail when running
 the scripts again, and then remove the package again!
@@ -248,13 +295,7 @@ npm install --ignore-scripts @opam-alpha/qcheck@0.4.0
 
 This will just install the source code, and let us know what it actually installed.
 
-Ouput:
-```
-test@1.0.0 /Users/jwalke/Desktop/tmp
-└─┬ @opam-alpha/qcheck@0.4.0 
-  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git
-```
-
+###### Try The Build Manually, In Place
 Now, make sure `npm` didn't do something weird with installing new versions of package
 that didn't show up in the dry run, and make sure it installed things
 as flat as possible in `node_modules`, as opposed to nesting `node_modules`
@@ -280,20 +321,6 @@ from the top again. This just makes sure you've got everything
 nice and clean as if you installed it for the first time.
 
 
-## Troubleshooting:
-- Check to make sure everything is installed correctly. There's a `script`
-  already setup that will help you test the location of where `Reason` has been
-  compiled into.
-
-- If something goes wrong, try deleting the local `node_modules` directory that
-  was installed, and then try reinstalling using `npm install -f`.
-
 ```
 npm run whereisocamlmerlin
 ```
-
-## TODO:
-
-- This also installs sandboxed IDE support for Vim/Atom/Emacs. We need to
-  upgrade all of the plugins to automatically search for IDE plugins inside of
-  the `./node_modules` directory.

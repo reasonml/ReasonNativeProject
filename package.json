@@ -27,6 +27,7 @@
   "scripts": {
 
     "postinstall": "npm run reasonBuild",
+    "buildHelp": "eval $(dependencyEnv) && nopam && rebuild --help",
     "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -I src ./src/Test.native 2>&1 | refmterr",
     "reasonbuild": "npm run reasonBuild",
 
