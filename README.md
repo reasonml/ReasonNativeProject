@@ -1,65 +1,149 @@
-# ExampleProject
+# ReasonProject
 
-[![Build Status](https://travis-ci.org/reasonml/ExampleProject.svg?branch=master)](https://travis-ci.org/reasonml/ExampleProject)
+Reason project environment via `npm`.
 
-## Reason via `npm`
+- Local sandboxed `Reason` projects.
+- Installation of `Reason` tools globally.
 
-Example project using Reason as an `npm` dependency. Use this as a template to
-quickly start a new project, or just try out `Reason`.
+Those two features may sound completely different, but the truth is that they
+are very similar, and therefore it makes sense to have `ReasonProject` handle
+both.
+
+> A sandboxed environment models dependencies and builds them into a local
+> directory so that it works reliably for anyone. Installing tools into your
+> global environment is simply a matter of sourcing the sandboxed environment
+> in your `.bashrc`. It's easy to make sandboxed local environments global, and
+> very hard to do the reverse, so `ReasonProject` starts with local
+> environments.
+
+
+[![Build Status](https://travis-ci.org/reasonml/ReasonProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonProject)
 
 ## Get Started:
 
+Install by cloning the repo and running `npm install`. This installs all
+dependencies locally into the `ReasonProject` directory.
+
 ```sh
-git clone https://github.com/reasonml/ExampleProject.git
-cd ExampleProject
+git clone https://github.com/reasonml/ReasonProject.git
+cd ReasonProject
 npm install
-npm start
 ```
 
-## Make Changes And Rebuild :
+### Run, Change, Rebuild
+
+There are a couple of built in commands declared in `package.json` that you can
+execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
+and `"npm run clean"`. You can also [add your
+own](#reasonproject-get-started-add-your-own-scripts) commands.
+
+
 ```sh
-npm run reasonBuild
-npm run clean  # Clean if you need to!
+npm run start        # Runs the compiled app
+npm run reasonBuild  # Rebuilds after changing
+npm run clean        # Clean if you need to!
 ```
 
-If you are running as `root` already (you probably aren't) then invoke `npm
-install --unsafe-perm` instead.
 
-## Included Top Level
+### REPL
 
-The top level `rtop` is built in to the sandbox:
+The `rtop` REPL is built into the sandbox, and the command `npm run top` which
+starts the REPL is predefined in `package.json`.
 
 ```sh
 # Opens `rtop` from the sandbox.
 npm run top
 ```
 
-## Editor Support
+### Environment Commands
 
-All of the IDE support, including error highlighting, autocomplete, and
-syntax is included inside of the sandbox.
+Once built, `ReasonProject` generates an environment that you can temporarily
+load to execute commands within. The environment contains an enhanced `PATH`
+that contains binaries built by your dependencies, but this environment isn't
+loaded automatically. To temporarily load this environment, execute the
+predefined `npm run env --` command. You should pass the *actual* command you
+want to run after `--`.
 
 ```sh
-# Opens your `$EDITOR` with all the right tools in your `$PATH`
-npm run editor
+
+  npm run env -- which refmt
+
+> ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt 
+
 ```
 
-To make your editor load the IDE support from the sandbox:
+The previous command would likely fail if not prefixed with `npm run env --`
+because the dependencies are the ones that built `refmt` in this case.  `npm
+run env` makes all the things from our dependencies available.
 
-- Make sure your `$EDITOR` variable is set if not already.
-  - `export EDITOR=vim`, or `export EDITOR=atom`
-- Configure your `EDITOR` to load the `Reason` plugins. See the instructions
-  for [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
-  [Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+### Editor Support
+
+#### Prepare Your Editor
+
+All of the IDE plugins, including integration with error highlighting,
+autocomplete, and syntax highlighting are included inside of the built project.
+
+Configure your `EDITOR` to load the `Reason` plugins from your instance of
+`ReasonProject`. See the instructions for
+[Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+
+#### IDE support included.
+
+The editor config above mostly exists to load the *actual* editor support, from
+the `ReasonProject` build. The only thing we need is to make sure the `PATH`
+contains all the important stuff from `ReasonProject`'s build.  There are two
+approaches: one continues to avoid global variables (as we've done so far), and
+the other doesn't.
+
+##### Avoiding Global Paths
+
+You can continue to develop entirely in the isolated sandbox without polluting
+global environment variables, by opening your editor within the sandbox
+environment:
+
+```sh
+npm run env -- vim
+npm run env -- atom
+npm run env -- mvim
+```
+
+Because you've [prepared your
+editor](#reasonproject-get-started-editor-support)
+to load editor support from the environment, `npm run env -- yourEditor`
+ensures that your editor will find the editor support in your environment
+variables.
 
 > Note: If you use `atom`, and already have `opam` installed, then there's a
 known issue where `atom` has problems loading, but you can fix it easily
 by commenting out any part in your `bashrc` that sources opam environments.
 We will come up with a long term solution at some point.
 
+##### Just Using Global Paths
 
-## Making It Your Project
-`ExampleProject` is meant to be the starting point of your own project. You'll want
+Pure sandboxed based development doesn't always work for certain workflows.
+Prefixing *all* commands with `npm run env` may not work well. In that case,
+you can easily inject your successfully built project's environment into the
+global `PATH`, by putting the following in your `.bashrc`:
+
+```sh
+# In your .bashrc
+pushd ~/pathTo/ReasonProject/ && \
+  eval $(~/pathTo/ReasonProject/node_modules/.bin/dependencyEnv) && \
+  popd
+```
+
+
+### Multiple Projects
+
+You can have multiple clones/forks/builds of `ReasonProject` for each of your
+projects. When you make changes, you can share the project easily with anyone
+else. It's common to have multiple `ReasonProject`s simultaneously. If also
+using global environment variables, it's wise to also have one special
+`ReasonProject`, that is only used for augmenting the global path.
+
+### Making It Your Project
+`ReasonProject` is meant to be the starting point of your own project. You'll want
 to make use of existing libraries in your app, so 
 browse the growing set of `opam` packages ported to `npm` under
 [`opam-alpha`](https://www.npmjs.com/~opam-alpha#packages). If there's something
@@ -90,20 +174,6 @@ as they are, but a next generation `opam-beta` universe on `npm` would have
 everything `opam-alpha` has (and then some). The work to upgrade your projects
 will likely be minimal.
 
-### What's happening
-- `npm install` will download and install all your dependencies, and run the
-  `postinstall` steps for all of those dependencies, and then finally the
-  `postinstall` script step of this project.
-- `npm start` will run the script located in the `start` field of the
-  `scripts` section of the `package.json` file here. The `start` script simply
-  runs the binary that was built in the `postinstall` step.
-- No, really - all you need is `npm` (> `3.0`). All of the compiler infrastructure
-  has been organized into `npm` packages, and will be compiled on your host
-  inside of the `./node_modules` directory. No `PATH`s are poluted. No global
-  environment variables destroyed. No trace is left on your system. If you
-  delete the `./node_modules` directory, you're back to exactly where you
-  started.
-
 
 ### Add Your Own Scripts
 - `npm` allows `scripts` to be specified in your project's `package.json`.
@@ -132,13 +202,13 @@ will likely be minimal.
   repo](https://github.com/npm-ml/dependency-env).
 
 
-### How to turn this project into a library
+### Creating Reusable Libraries
 
 - To turn this example project into a library that other people can depend on
   via `npm`... (coming soon).
   
 
-### Debugging a Failed Dependency Install
+### Debugging Failed Dependencies
 
 When `npm install` fails to install one of your dependencies successfully, it's
 typically because a `postinstall` step of a package has failed. Read
@@ -163,7 +233,7 @@ Output:
 ```sh
 test@1.0.0 /Users/jwalke/Desktop/tmp
 └─┬ @opam-alpha/qcheck@0.4.0 
-  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
+  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git
 ```
 (Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
 package. That's okay).
@@ -182,14 +252,14 @@ Ouput:
 ```
 test@1.0.0 /Users/jwalke/Desktop/tmp
 └─┬ @opam-alpha/qcheck@0.4.0 
-  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git#85bd0e35bec2987b301fa26235b97c1e344462df)
+  └── qcheck-actual@0.4.0  (git://github.com/npm-opam/qcheck.git
 ```
 
 Now, make sure `npm` didn't do something weird with installing new versions of package
 that didn't show up in the dry run, and make sure it installed things
 as flat as possible in `node_modules`, as opposed to nesting `node_modules`
 for compiled ocaml packages inside of other `node_modules`. Ideally, everything
-is a flat list inside the `ExampleProject/node_modules` directory.
+is a flat list inside the `ReasonProject/node_modules` directory.
 
 `cd` into the package that was failing to build correctly (it was actually the `qcheck-actual` package
 in our case). Run the build command in `package.json`'s `postinstall` field by doing `npm run postinstall`.
