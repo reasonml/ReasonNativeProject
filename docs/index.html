@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width">
 
-  <title>Reason</title>
+  <title>Reason Project</title>
 
   <!-- Flatdoc -->
   <script src='support/vendor/jquery.js'></script>
@@ -25,1375 +25,333 @@
 
 
   <script id="markdown" type="text/markdown" src="index.html">
+# ReasonProject
+
+Installation of [`Reason`](http://facebook.github.io/reason/) project and
+development environments via `npm`.
+
+> Requirements: `npm` (currently tested on Mac, Linux, and Windows Linux subsystem).
+
+`ReasonProject` installs the `Reason` toolchain into a local directory using
+`npm`.  `ReasonProject` can therefore be used as a template for new projects,
+but can also be used to install the toolchain [into the global
+environment](#reasonproject-editor-support).  `ReasonProject` includes: the
+compiler toolchain, the source formatter, REPL, and IDE support for popular
+editors.
+
+> A sandboxed environment models dependencies and builds them into a local
+> directory so that it works reliably for anyone. Installing tools into your
+> global environment is simply a matter of sourcing the sandboxed environment
+> in your `.bashrc`. It's easy to make sandboxed local environments global, and
+> very hard to do the reverse, so `ReasonProject` starts with local
+> environments.
 
 
-Reason
-=======
-A new developer experience for rapidly building fast, safe systems.
+[![Build Status](https://travis-ci.org/reasonml/ReasonProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonProject)
 
-<table style="width:100%">
-  <tr style="border:none">
-    <td style="border:none; padding:0px">
-      <div class="featureContainer" style="">
-        <div class="featureColumn" style="">
-          <div class="featureIcon octicon octicon-code"></div>
-          <div class="featureItemBox" style="">
-            <span class="featureHeader">
-              Syntax
-            </span>
-          </div>
-        </div>
-        <div class="featureColumn featureComingSoon" style="">
-          <div class="featureIcon octicon octicon-zap"></div>
-          <div class="featureItemBox" style="">
-            <span class="featureHeader">
-              Build
-            </span>
-          </div>
-        </div>
-        <div class="featureColumn featureComingSoon" style="">
-          <div class="featureIcon octicon octicon-package"></div>
-          <div class="featureItemBox" style="">
-            <span class="featureHeader">
-              Share
-            </span>
-          </div>
-        </div>
-      </div>
-    </td>
-  </tr>
-</table>
+## Install
 
-`Reason` is a new interface to OCaml - a highly expressive dialect of the ML language
-featuring type inference and static type checking.
-
-`Reason` provides a new syntax and toolchain for editing, building, and sharing code, and
-will evolve in the open as a community collaboration. `Reason` already has contributors
-across several organizations/companies.
-
-
-<table style="width:100%"> <tr style="border:none"> <tr style="border:none">
-      <td style="padding: 20px; border:none; text-align:center">
-      [Compare JS >](./javaScriptCompared.html)
-      [Compare ML >](./mlCompared.html)
-    </td>
-
-  </tr>
-
-
-</table>
-
-Install
----------------
-See [INSTALL STABLE](https://github.com/facebook/reason/blob/master/README.md#install-stable)
-in the [README](https://github.com/facebook/reason/blob/master/README.md).
-
-
-REPL
----------------
-
-`Reason` comes with a REPL called `rtop` which lets you interactively evaluate
-`Reason` syntax, and see the results printed in `Reason` syntax. It features
-intelligent, type-driven autocompletion.
-
-<img src="images/RtopOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;">
-
+Install by cloning the repo and running `npm install`. This installs all
+dependencies locally into the `ReasonProject` directory.
 
 ```sh
-# The rtop command begins a REPL session
-rtop
-```
-
-```sh
-let myVar = "Hello Reason!";
-# myVar: bytes = "Hello Reason!"
-
-let result = 100 + 200;
-# result : int = 300;
-```
-
-> `rtop`'s intelligent autocompletion and compiler interaction is powered by
-[`utop`](https://github.com/diml/utop). `utop` supports extension of custom
-parsers and printers.
-
-Syntax Basics
-=======
-
-Much of Reason's core syntax should be familiar to anyone who has ever used
-modern `JavaScript` / [Flow](http://flowtype.org/) or `Rust`. The examples in this document give an
-overview of the most important language constructs and their respective syntax.
-
-Primitives
-----------
-
-> Primitive                                  | Example
-> --------------------------------------|--------------------------------
-> Strings                               |  <pre>"Hello"</pre>
-> Characters                            |  <pre>'x'</pre>
-> Integers                              |  <pre>23</pre>
-> Floats                                |  <pre>23.0</pre>
-> Negative Integers                      |  <pre>-23</pre>
-> Integer Addition                      |  <pre>23 + 1</pre>
-> Float Addition                        |  <pre>23.0 +. 1.0</pre>
-> Integer Division/Multiplication       |  <pre>2 / 23 * 1</pre>
-> Float Division/Multiplication         |  <pre>2.0 /. 23.0 \*. 1.0</pre>
-> String Concatenation                  |  <pre>"Hello" ^ " " ^ "World"</pre>
-> Immutable Lists                       |  <pre>[1, 2, 3]</pre>
-> Immutable Lists Append                |  <pre>[item1, item2, ...theRest]</pre>
-> Reference Equality Comparison         |  <pre>thisThing === thatThing</pre>
-> Records                               |  <pre>{contents: 100}</pre>
-> Record Field Update (if mutable field)|  <pre>myRecord.contents = 200</pre>
-
-
-Let Bindings
-------------
-`let` bindings give names to values. Those bindings can be seen and referenced
-by code that comes after those bindings, so long as the bindings are still "in scope".
-To make `let` bindings, use the `let` keyword with an `=` symbol, and put a `;` after
-the binding. Try creating some bindings in the [`rtop REPL`](#reason-repl)
-
-```reason
-let identifier = expression;
-let identifier = expression;
-...
-```
-
-#### Let Bindings in Source Files
-
-Reason source files begin with an uppercase letter and use the `.re` file
-suffix. Among other things, each `.re` file includes a series of `let` bindings.
-In this example, a file `Hello.re` has two `let` bindings.
-
-```reason
-/*
- * Contents of Hello.re
- */
-let message = "Do you use Reason?";
-let response = "Why yes, I do indeed.";
-```
-
-#### Limiting Scope
-
-`let` bindings tie a name to a value and that name may be referenced at a later
-point in the file. To further limit scope of bindings, `Reason` provides `{}`
-block *expressions* which let you sequence `let`s together and then *evaluates*
-to the last item in the sequence. In this example, the binding `three`
-evaluates to the `integer` `3`.  The `{}` block ensures that `one` and `two`
-are not accessible after `three` is computed.
-
-```reason
-let three = {
-  let one = 1;
-  let two = 2;
-  one + two
-};
-/* one and two not accessible here! */
-```
-> Note that the last item may optionally include a terminating semicolon.
-
-#### Constant bindings
-
-`let` bindings are immutable. Once a binding refers to a value, it cannot
-refer to anything else. However, you may create a new binding of the same
-name which will *shadow* the previous binding; aka, from that point onward,
-the binding will refer to the newly assigned value.
-
-```reason
-let msg = "hello";
-print_endline msg; /* Prints "hello" */
-let msg = "bye";
-print_endline msg; /* Prints "bye" */
-```
-
-
-#### Imperative Code
-
-You may interleave imperative commands such as logging along with your let
-bindings. This works both for `let` bindings in files, and also in block
-scopes. Interleaved imperative commands don't change what block expressions
-evaluate to.
-
-```reason
-let three = {
-  let one = 1;
-  print_string "fire the missiles";
-  let two = 2;
-  one + two
-};
-```
-
-Types Basics
---------------------------
-
-#### Type Annotations
-
-Even though types are inferred (you don't _have_ to write them out), you may
-still choose to write "type assertions" on any expression. Anywhere you would
-normally write an expression, just append `: yourType`, and then wrap the
-result in parenthesis.
-
-
-```reason
-(expression : typeConstraint)
-```
-
-
-These assertions are then verified by the compiler.
-```reason
-let bindingOne = 5;
-let bindingOne = (5 : int);
-let bindingOne = (5 : int) + (4 : int);
-let bindingOne = ((5 : int) + (4 : int) : int);
-```
-The other place that type assertions are accepted is immediately following the
-`let` keyword. This is equivalent to asserting the type of the expression on
-the right hand side of the `=`.
-```reason
-let identifier : typeConstraint = expression;
-let identifier = (expression : typeConstraint);
-```
-
-<br />
-
-```reason
-/* Equivalent type assertions. */
-let frameworkName = ("React": string);
-let frameworkName : string = "React";
-```
-
-#### Type Aliases
-
-You may refer to a type by a different name, by creating a type alias with the
-`type` keyword. The new type alias may be used in annotations as well. You can
-see there is somewhat of a "scope" for `type` aliases, similar to `let`
-bindings.
-
-```reason
-type myType = int;
-let x: myType = 10;  /* Now we can "see" myType */
-```
-
-Tuples
---------------------------
-
-A tuple is a list of values of *known* size, such as "pair". They are written
-as comma delimited lists, always wrapped in parenthesis.
-
-
-```reason
-let myThreeFloats = (20.0, 30.0, 100.0);
-let myIntAndString = (20, "totallyNotAnInteger");
-```
-
-Tuples have types and those types can be used in type annotations as well.
-Tuple types resemble tuples themselves - comma delimited lists of types,
-wrapped in parenthesis.
-
-```reason
-let myThreeFloats: (float, float, float)  = (20.0, 30.0, 100.0);
-let myIntAndString: (int, string) = (20, "totallyNotAnInteger");
-```
-
-Tuples represent two or more values together, but sometimes you want to
-represent *zero* values. In `Reason`, you can express this idea by writing
-`()`. We call this thing "unit", and it has type `unit`.
-
-```reason
-let nothing = ();
-```
-
-You may create type aliases for tuple types just like you can with any other
-type.
-```reason
-type threeFloats = (float, float, float);
-type intAndString = (int, string);
-
-let myThreeFloats: threeFloats = (20.0, 30.0, 100.0);
-let myIntAndString: intAndString = (20, "totallyNotAnInteger");
-```
-
-Records
--------
-
-Records are a set of named values. They resemble "objects" (from OO) but they
-are simpler, less flexible, and offer extremely fast field access. To create a
-record, some type definition describing its fields must be in scope.  In
-`Reason`,  type definitions for records resemble the shape of the records
-values they describe.
-
-
-```reason
-type person = {age: int, name: string};
-let me = {age: 30, name: "Jordan"};
-print_string me.name;
-```
-
-New records may be easily created from old records with the `...` spread
-operator, which changes a subset of the fields, but doesn't alter the original
-record.
-
-> Note: spread cannot add new fields.
-
-```reason
-let meNextYear =  {
-  ...me,
-  age: me.age + 1
-};
-```
-
-##### Mutable record fields.
-
-When defining the record type, you can mark some record fields as `mutable`.
-This allows you to update those fields with the `=` operator. In general,
-having language level distinction between `mutable` and immutable offers
-opportunities for compile time performance optimizations.
-
-```reason
-type person = {
-  name: string,
-  mutable age: int
-};
-let me = {name: "Jordan", age: 30};
-me.age = me.age + 1;
-```
-
-Destructuring
--------------
-"Destructuring" can be used to extract one or more fields from a record or
-tuple, while automatically binding them to local variables. Any place variables
-are introduced into scope, you may use destructuring. To destructure, instead
-of writing the variable name as usual, write out the deep shape of the object.
-
-
-> The following binds variables:
-> `ten = 10`, `twenty = 20`
-
-```reason
-let someInts = (10, 20);
-let (ten, twenty) = someInts;
-```
-
-> The following binds variables:
-> `n = "Guy"`, `a = 30`
-
-```reason
-type person = {name: string, age: int};
-let somePerson = {name: "Guy", age: 30};
-let {name: n, age: a} = somePerson;
-```
-
-Destructuring also allows type annotations *while* destructuring.
-```reason
-let (ten: int, twenty: int) = someInts;
-let {name: (n:string), age: (a:int)} = somePerson;
-```
-
-
-
-Functions
----------
-
-Functions are introduced with the `fun` keyword, followed by the name of the
-arguments, an arrow `=>` then any expression as the return value. You may omit
-the parenthesis around the argument when the argument is clearly "one unit"
-(such as a simple variable name).
-
-```reason
-fun (argument) => expression
-```
-Functions are first class and you can use `let` bindings to give them names.
-
-
-```reason
-let increment = fun (x) => x + 1;
-let double = fun x => x + x;
-```
-> We've chosen to omit the parenthesis around the second function's argument.
-
-To call a function, supply its argument after the name of the function.
-
-```reason
-let six = increment(5);
-let thirteen = increment(double(6));
-```
-Just like with function definitions, you can omit the parenthesis around the
-argument when you call the function, if the argument is clearly "one unit". In
-this example, the `5` is clearly one unit so the `()` were omitted. The
-parenthesis around `double 6`, could _not_ be omitted because `double 6` is not
-"one unit".
-
-
-```reason
-let six = increment 5;
-let thirteen = increment (double 6);
-```
-
-#### 
-
-Functions can return any expression, but "block expressions" are often chosen
-because they allow declaring temporary, block-scoped variables, and allow
-performing side effects.
-
-```reason
-let doSomeMath = fun arg => {
-  let tmp = 2 * arg;
-  let next = 3 * arg;
-  tmp * next
-};
-
-let performsSideEffects = fun arg => {
-  print_string "Entering the function";
-  let tmp = 2 * arg;
-  let next = 3 * arg;
-  print_string "Returning from the function";
-  tmp * next
-};
-```
-
-#### Arguments
-
-You can pass multiple pieces of data at once to the function, by passing a
-tuple. A function argument may be [destructured](#syntax-basics-destructuring)
-"on the way into" the function which gives you convenient access to each item
-in the tuple.
-```reason
-let addTupleFields = fun (first, second) => {
-  first + second
-};
-let five = addTupleFields (4, 1);
-```
-
-The tuple is still first class, and the function still accepts a single argument, so
-you could have also called the function like this:
-```reason
-let myTuple = (4, 1);
-let five = addTupleFields myTuple;
-```
-
-
-You can pass, and destructure a tuple with zero elements as well.
-
-```reason
-let logToUser = fun () => {
-  print_string "Logging to user";
-  print_string "Okay, logging done";
-};
-/* Now call it */
-logToUser ();
-```
-
-
-#### 
-You can pass/destructure records too. (If record type
-definitions are in scope).
-
-```reason
-let isOverThirty = fun {name: n, age: a} => {
-  let ret = a > 30;
-  ret
-};
-let overThirty = isOverThirty {name: "Jay", age: 31};
-```
-
-You may annotate the types of individual parts of the destructuring on the way
-into the function.
-```reason
-let addTupleFields = fun (first:int, second:int) => {
-  first + second
-};
-let isOverThirty = fun {name: (n:string), age: (a:int)} => {
-  let ret = a > 30;
-  ret
-};
-```
-
-
-#### Function Types
-Function types are written by listing the argument type, an arrow, and then
-the return type.
-
-```reason
-argumentType => expressionType
-```
-
-Here, we create a type alias for the types of functions in the previous
-examples and then we assert that they are compatible with those functions.
-
-```reason
-type intTupleToInt = (int, int) => int;
-type intToInt = int => int;
-let a = (increment : intToInt);
-let b = (addTupleFields : intTupleToInt);
-```
-
-
-
-
-#### Recursive Functions
-
-By default, values can't see a binding that points to it, but including the
-`rec` keyword in a `let` binding makes this possible. This allows functions
-to see and call themselves, giving us the power of recursion.
-
-```reason
-let rec neverTerminate = fun () => neverTerminate ();
-```
-
-#### Mutually Recursive Functions
-
-Mutually recursive functions start like a single recursive function using the
-`rec` keyword, and then are chained together with `and`:
-
-```reason
-let rec callSecond = fun () => callFirst ()
-and callFirst = fun () => callSecond ();
-```
-
-#### Functions Returning Functions
-
-Functions can return other functions. Here's a function `createAdder` that
-creates an adder function. We call `createAdder` first with `4`, and then call
-the result of that with `1`.
-
-```reason
-let createAdder = fun addAmount => (
-  fun x => addAmount + x
-);
-let five = createAdder(4)(1);
-```
-
-`createAdder` has the following type. This type tells us that it is a function
-that when called with an `int`, will return *another* function. That returned
-function itself expects an `int` and returns an `int`. The parenthesis may be
-omitted.
-
-```reason
-int => (int => int)
-```
-
-This pattern is called "currying", and because it is so common, `Reason`
-includes some syntactic sugar for it. Here is the previous example, but written
-using the syntactic sugar. Many people use this pattern because it simulates
-multiple arguments.
-
-
-```reason
-let createAdder = fun addAmount x => addAmount + x;
-let five = createAdder 4 1;
-```
-> Note: Curried functions don't typically incur performance hit when all the
-arguments are supplied at once because intermediate function allocations are
-optimized away!
-
-[Learn more about currying](#diving-deeper-curried-functions)
-
-
-Variants
---------
-
-Variant types allows data to have either one form *or* another. In Reason, each
-form is given a capitalized name called a "constructor" (not in the OO sense).
-To declare a variant type, enumerate every constructor by the `|` token.
-
-```reason
-type response =
-  | Yes
-  | No
-  | PrettyMuch;
-let areYouCrushingIt = Yes;
-```
-
-A `switch` expression is like a large `if/elseif/elseif..`, but much more
-powerful. To use it, enumerate every variant constructor, each followed by an `=>`
-and the expression that the entire `switch` should evaluate to for that case. In
-this example, the `message` variable is assigned the string `"..."`.
-
-```reason
-let isSafeToLaunchRocket = PrettyMuch;
-let message = switch isSafeToLaunchRocket {
-  | No => "Check Integrity."
-  | Yes => "All Systems Go."
-  | PrettyMuch => "..."
-};
-```
-
-The compiler will raise a type error if you've forgotten to cover a case of your
-variant, or if two cases are redundant. You can also destructure while
-enumerating the cases. See more below.
-
-##### Constructor Arguments
-
-Reason constructors are not your OO constructors. They're more like functions
-for variants. They may contain one or more pieces of data by declaring those
-contained types in a space-separated list after the constructor.
-
-```reason
-type account =
-  | None
-  | Facebook string int
-  | Instagram string;
-```
-
-> Instantiating a constructor that carries data is exactly the same as
-calling a function. Supply the data as space separated "arguments".
-
-```reason
-let myAccount = Facebook "Kay" 1234;  /* Accepts two arguments */
-let yourAccount = None;               /* Accepts no arguments */
-```
-
-##### Destructuring Arguments of a Constructor
-
-Once created, constructor data can be extracted via destructuring, much like
-with tuples. In this example, a local variable `x` is bound to `42`.
-`getTheInt` extracts a `Leaf`'s contained integer "on the way into" the function.
-
-```reason
-type intLeaf = | Leaf int;
-let myIntLeaf = Leaf 42;
-
-let Leaf x = myIntLeaf;
-let getTheInt = fun (Leaf q) => q;
-let fourtyTwo = getTheInt myIntLeaf;
-let twentyNine = getTheInt (Leaf 29);
-```
-
-** When Simple Destructuring Isn't Enough: **
-Simple destructuring isn't sufficient for variants types with many
-constructors. The following example would clearly have to fail at runtime!
-Fortunately, the compiler forbids this.
-
-```reason
-type possibleNum =
-  | NotDefined
-  | Defined integer;
-
-let myNumber = NotDefined;
-let Defined x = myNumber;   /* Type error! */
-```
-** The Solution: ** To recover data in variants with many constructors,
-`switch` allows us to enumerate each constructor *while* destructuring the
-constructor's data on the left side of the `=>`.  Unlike our previous naive
-attempt, this works because we enumerate every possible constructor name inside
-of the `switch`.
-
-> Note: We've safely unpacked the `i` from `Defined i`, because we've *also*
-> specified what to do when `myNumber` was `NotDefined`.
-
-```reason
-let x = switch myNumber {
-  | Defined i => i
-  | NotDefined => 0
-};
-```
-##### Multiple Arguments vs. Tuples (*Details*)
-
-Notice that a variant constructor that contains many fields is different than a
-variant constructor that carries a single field that happens to be a tuple.
-Among other differences, tuples are not "inlined" into the variant object's
-runtime representation, whereas, multiple constructor arguments incur no
-additional abstraction cost (they are "inlined" into the variant data).
-
-```reason
-type toTupleOrNotToTuple =
-   | HasTuple (int, int, int)
-   | NoTuple int int int;
-
-let aTuple = HasTuple (1, 2, 3);
-let notTuple = NoTuple 1 2 3;
-
-let sumsZero = switch x {
-  | HasTuple (a, b, c) => a + b + c == 0
-  | NoTuple a b c => a + b + c == 0
-};
-
-```
-
-Loops and Tests
----------------
-
-#### If Expressions
-
-The syntax for `if` expressions should look very familiar. Just like within
-function "bodies", the `{}` braces may include a sequence of temporary `let`
-bindings or imperative commands, all separated by `;`. An `if` statement may
-include an optional `else` branch.
-
-```reason
-if (testCondition) {
-  ifTrue
-};
-
-if (testCondition) {
-  ifTrue
-} else {
-  ifFalse
-};
-```
-
-In this example, the word `"hi"` is printed if `sayHi` is `true`, and prints
-`"bye"` otherwise.
-```reason
-if (sayHi) {
-  print_string "hi";
-} else {
-  print_string "bye";
-};
-```
-
-> Note: The parenthesis around the test condition may be omitted if the test
-condition is "simple" enough (meaning it is a single, standalone word).
-
-If expressions aren't just for imperative code - they can also be used to
-compute a result. Just place an expression on the final line of the `{}`
-sequence for each branch. If your `if` expression has no `else` branch, it
-is clearly only useful for imperative programming and therefore the entire `if`
-will evaluate to the unit value `()`.
-
-
-```reason
-let valueToLog =
-  if (booleanTest) {
-    let tmp = "name";
-    String.capitalize tmp;
-  } else {
-    "default";
-  };
-```
-
-`if`/`else` expressions may be chained together in a familiar manner.
-
-```reason
-if (sayHi) {
-  print_string "hi";
-} else if (sayBye) {
-  print_string "bye";
-} else {
-  print_string "nothing to say";
-};
-```
-#### Ternaries
-
-For smaller boolean if else statements, `Reason` includes a ternary expression
-which might look more aesthetically pleasing in some cases.
-
-```reason
-testCondition ? ifTrue : ifFalse
-```
-
-```reason
-let valueToLog = shouldUseDefault ? 200 : yourNumber;
-```
-
-
-#### For Loops
-
-For loops are fully imperative constructs that iterate through a range of
-numbers, from a beginning value up to (and including) the ending value. The
-general form of a `for` loop includes an identifier that is incremented each
-iteration, and a range `startVal` to `endVal`.
-
-```reason
-for identifier in (startVal) to (endVal) {
-  statements
-};
-```
-
-The parenthesis around the `startVal` and `endVal` may be omitted if they are
-clearly unnecessary as in the following example.
-
-```reason
-let xStart = 1;
-let xEnd = 3;
-/* prints: 1 2 3 */
-for x in xStart to xEnd {
-  print_int x;
-  print_string " ";
-};
-```
-
-You can make the `for` loop count in the opposite direction by using the `downto`
-keyword.
-
-```reason
-for identifier in (startVal) downto (endVal) {
-  statements
-};
-```
-
-```reason
-let xStart = 3;
-let xEnd = 1;
-/* prints: 3 2 1 */
-for x in xStart downto xEnd {
-  print_int x;
-  print_string " ";
-};
-```
-
-#### While Loops
-
-Type Parameters
-----------
-Some types are very specific, such as `int`, or `string`, but other types
-are much more general. For example, knowing that a value has type `list`,
-leaves so many unanswered questions - namely, what's *in* the list?! `list`
-is clearly a more general type.
-
-Recall how functions act as factories for other _values_. Supplying a function
-with a parameter produces a new value. In the same way, some types, such
-as `list`, act as factories for other _types_ - if you supply them a **"type
-parameter"**, they generate another type.  This example shows supplying the
-`list` type factory with `string`. It results in a type describing
-lists of strings.
-
-```reason
-type listOfStrings = list string;
-let lst : listOfStrings = ["hi", "bye"];
-```
-> Notice the syntactic similarity between supplying function parameters and
-type parameters.
-
-
-You can define your own custom "type factories" by using the following syntax.
-Notice the `'` before the `typeParam`. `typeStructure` can be any form of type
-that is allowed to reference `typeParam`.
-
-```reason
-type typeFactoryName 'typeParam = typeStructure;
-```
-
-For example, you could define a family of tuple types like this:
-
-```reason
-type tupleTypeFactory 'a = ('a, 'a);
-```
-
-Then you could create more specific types by "calling" the `tupleTypeFactory` type
-generating "function" as follows:
-
-```reason
-type tupleOfInts = tupleTypeFactory int;
-type tupleOfStrings = tupleTypeFactory string;
-```
-
-To make type factories that accept multiple type parameters, list all of the
-parameters next to each other. Then to use the type factory, supply all
-of the type parameters as if you were calling a curried function.
-
-
-```reason
-type tupleOf 'left 'right = ('left, 'right);
-type tupleOfIntString = tupleOf int string;
-```
-
-The type factories can define record and variant shapes that make full use of
-the type parameters.
-
-```reason
-type containerOf 'a = {containedThing: 'a};
-let c : containerOf int = {containedThing: 10};
-
-type result 'a 'b =
-  | Ok 'a
-  | Error 'b;
-let r : result string int = Ok "here is the result";
-```
-
-Exceptions
-----------
-Exceptions are just a special kind of [variant](#syntax-basics-variants) that
-can be "thrown" in exceptional cases. When you have powerful variants, you
-often don't _need_ exceptions because you can just use variants types such as
-the defined `type result` above. But for exceptional cases, it's great to
-have the ability to throw exceptions up the call stack and catch them at
-convenient recovery points. Thankfully, these two separate, but useful
-constructs are unified into one handler abstraction so you can `switch` on the
-result of a function call, but add cases for handling exceptions that occured.
-
-More details coming soon.
-
-Diving Deeper
-==============
-
-Curried Functions
------------------
-
-#### Currying vs. Tuples.
-
-Instead of having a function accept a tuple as an argument, you might choose to
-make that function curried instead. Currying accomplishes the same goal, but
-allows you to supply the set of input data one at a time, potentially "pausing"
-when you've only supplied a portion of the argument data. Compare this to
-passing a tuple where you must supply all of the data at once.
-
-
-#### Named Curried Functions
-
-One downside to curried functions is that they are "biased" to arguments that
-appear first. Meaning, when you curry functions, you can "partially apply" some
-of the arguments, saving the rest for later, but you can only partially apply
-the arguments that come *first*. Labelled curried functions address this
-concern by letting you assign *labels* to arguments, and then partially apply
-arguments by their label, regardless of their *position*. Labels are created by
-simply prepending `labelName::` to the function argument.
-
-```reason
-
-let add =
-  fun first::f second::s => f + s;
-
-let result = add first::10 second::20;
-
-let addFour = add second::4;
-
-let five = addFour first::1;
-
-```
-
-Labelled curried arguments also allow setting default values using the equals
-sign. The way defaults work is a little tricky, but here's the general rule:
-When calling functions, default arguments are "filled in" as soon as you supply
-a *non-named* argument. More specifically - all of the default arguments to the
-*left* of that non-named argument are filled in, as soon as the non-named argument
-is supplied at invocation time.
-
-```reason
-
-/* Notice how `by` is to the left of `num` */
-let increment = fun by::by=0 num => num + by;
-
-let two = increment by::1 1;
-
-let four = increment 4;
-
-```
-
-It's also possible to use punning for labelled curried arguments.
-
-```reason
-
-let increase amount::amount => amount + 1;
-
-```
-
-is the same as
-
-```reason
-let increase ::amount => amount + 2;
-```
-
-
-Expressive Pattern Matching
----------------------------
-There are several destructuring conveniences that pair well with compiler
-verified `switch` expressions.
-For example, you can express arbitrarily nested destructuring "patterns", which
-the compiler will ensure have no uncovered cases. In this example, `name` is
-bound to `"Jo"` and `model` is bound to `"Tacoma"`.
-
-```reason
-type car = {model: string, make: string};
-let toyota = {make: "Toyota", model: "Tacoma"};
-
-type carOwner =
-  | CarOwner string car; /* May as well be a tuple */
-
-let CarOwner name {model: model, make: make} = CarOwner "Jo" toyota;
-```
-
-##### 
-This deep pattern matching is especially expressive when used in `switch`
-expressions. In this example, the function `hasExactlyTwoCars` has specified
-what to return in four cases in very little code. Even more helpful, is the
-fact that the compiler verifies that no two edge cases are redundant, and that
-every possible case has been covered. It turns out, that pattern matching
-becomes an extremely powerful tool to enforce constraints in your program. The
-more you model your program in terms of variants, the more the compiler assists
-you stop bugs before they even run - the end result being more rapid
-development. This `ML` pattern matching is famous for coining the phrase: "If
-it compiles, it works!".
-
-```reason
-type car = {maker: string, model: string};
-type carList =
-  | List car carList
-  | NoMore;
-
-let chevy = {maker: "Chevy", model: "Suburban"};
-let toyota = {maker: "Toyota", model: "Tacoma"};
-let myCarList = List chevy (List toyota NoMore);
-
-let hasExactlyTwoCars = fun lst =>
-  switch lst {
-    | NoMore => false                              /* 0 */
-    | List p NoMore => false                       /* 1 */
-    | List p (List p2 NoMore) => true              /* 2 */
-    | List p (List p2 (List p3 theRest)) => false  /* 3+ */
-  };
-
-let justTwo = hasExactlyTwoCars myCarList;  /* true! */
-```
-
-Objects
-----------------------------------
-Although functions are the preferred way of working within Reason, it's also possible to use
-objects.
-
-An object encapsulates data that it stores within fields, and has methods that can be invoked
-against the data it has.
-
-##### Declaring an object type
-An object can have an object type to define its structure.
-
-```reason
-type tesla = {
-  .
-  color: string
-};
-```
-The extra dot at the beginning is to indicate that this is a closed object type, which means that
-an object based on this type must have exactly this public structure.
-
-```reason
-type car 'a = {
-  ..
-  color: string
-} as 'a;
-```
-Two dots, also called an elision, indicate that this is an open object type, and therefore
-can also contain other values and methods. An open object is also polymorphic and therefore
-requires a parameter.
-
-An object type is not required to create an object.
-
-##### Creating an object
-```reason
-type tesla = {
-  .
-  drive: int => int
-};
-
-let obj:tesla = {
-  val hasEnvy = {contents: false};
-  pub drive speed => {
-    this#enableEnvy true;
-    speed
-  };
-  pri enableEnvy envy => {
-    hasEnvy.contents = envy
-  };
-};
-```
-This object is of object type tesla and has a public method `drive`. It also contains a
-private method `enableEnvy` that is only accesible from within the object.
-
-The following example shows an open object type which uses a type as parameter. The
-object type parameter is required to implement all the methods of the open object
-type.
-
-```reason
-type tesla 'a = {
-  ..
-  drive: int => int
-} as 'a;
-
-let obj: tesla {. drive: int => int, x: int => int} = {
-  val hasEnvy = {contents: false};
-  pub drive speed => {
-    this#enableEnvy true;
-    speed
-  };
-  pri enableEnvy envy => {
-    hasEnvy.contents = envy
-  };
-};
-```
-
-Syntactic Sugar (Abbreviations)
-----------------------------------
-
-
-##### Function Definitions
-You have already seen one form of function syntactic sugar. Though it appears that
-functions accept multiple arguments, every function actually only accepts a
-single argument. "Multiple arguments" separated by spaces are actually defining
-a series of curried functions. The two function definitions on the right are equivalent.
-
-```reason
-let add = fun a b => a + b;
-/* Is the same as */
-let add = fun a => fun b => a + b;
-```
-
-Function application for a curried
-function can look very clean in many cases,
-because parentheses around the function argument may be omitted if the argument
-is clearly a single word or a grouping.
-
-```reason
-let five = add(4)(1);
-/* Is the same as */
-let five = add 4 1;
-```
-
-You only need to include parentheses around arguments when it otherwise
-wouldn't obviously be a single item.
-```reason
-let five = add (firstEvaluateThis 0 0) 1;
-```
-> Note: You pay no additional performance cost for curried functions
-when they are invoked with all the arguments. You may even ignore the fact that
-currying is occurring at all, if you like.
-
-##### Function Let Binding
-There is one more function binding syntax that has not yet been shown: When a function
-is defined with a `let` binding, the syntax `= fun` may be omitted.
-All the function definitions on the right are equivalent.
-
-```reason
-/* All of the following are equivalent. */
-let add a b => a + b;
-let add = fun a b => a + b;
-let add = fun a => fun b => a + b;
-```
-
-##### Module Functions Definitions
-
-[Module Functions](./modules.html#modules-module-functions) follow the same syntactic convention as regular
-functions. Space-separated arguments are actually currified *module functions*
-and the syntax `= fun` may be omitted, resulting in three forms of module function
-definitions which are all equivalent.
-
-```reason
-/* All of the following are equivalent. */
-module ModuleFunc (A:ASig) (B:BSig) => {};
-module ModuleFunc = fun (A:ASig) (B:BSig) => {};
-module ModuleFunc = fun (A:ASig) => fun (B:BSig) => {};
-```
-
-##### Record *Value* "Punning"
-
-If variables in scope have the same name as record fields, then record
-expressions can be written in a shorter form, where `name:name` can be
-abbreviated as `name`. This is called "punning" (just like JavaScript ES6).
-
-```reason
-type myRecord = {first: int, second: int};
-let first = "f";
-let second = "s";
-
-/* The following are equivalent. */
-let theRecord = {first:first, second:second};
-let theRecord = {first, second};
-
-/* Or only take the shortcut for a subset of the fields. */
-let theRecord = {first, second: 0};
-
-```
-
-##### Record *Pattern* "Punning"
-
-The same record "punning" syntax may be used with destructuring, in all of the
-places where destructuring is allowed (`let` bindings, function arguments,
-`switch` matching).
-
-```reason
-let {first:first, second:second} = theRecord;
-let {first, second} = theRecord;   /* Abbreviation */
-
-let sumsToZero = fun {first, second} => first + second == 0;
-```
-
-
-Advanced
-=======
-With the basic constructs covered, here are more advanced features.
-
-Bindings Revisited
----------------------------
-
-Modules
--------
-
-See [Modules](./modules.html)
-
-
-Community
-=======
-We're currently on IRC (freenode #reasonml) and [Discord](https://discord.gg/reasonml). Come say hi! We'll provide you first class support =).
-
-
-How Reason Works
-=========================
-
-The OCaml compiler is organized into several stages, which are exposed as
-libraries. `Reason` replaces part of the compiler toolchain with a completely
-new syntax parser that is more approachable, while still fully compatible with
-the rest of the compiler.  `Reason` also implements a new source printer which
-integrates into your IDE and the new custom [`REPL`](#reason-repl).
-
-###### Why OCaml?
-
-OCaml is a great tool for writing highly expressive, functional
-*or* imperative code, with type inference and fast runtime performance.
-Because of these properties, OCaml has helped
-Facebook quickly build scalable infrastructure such as
-[Hack](http://hacklang.org/), [Flow](http://flowtype.org/), and
-[Infer](http://fbinfer.com/). It is also used for other performance sensitive
-applications in the financial industry (Jane Street, Bloomberg). At the same
-time, OCaml has a very mature (*and still growing*) ecosystem for targeting
-browser and `JavaScript` environments with a focus on language interoperability
-and integration with existing `JavaScript` code.
-
-
-`Reason`'s non-invasive approach to the `OCaml` compiler allows `Reason` code
-to take advantage of all of the existing `OCaml` compiler
-optimizations/backends such as bare metal `ARM`, `x86`, and even `JavaScript`
-compilation.
-
-
-###### In the Wild
-
-[Infer](https://github.com/facebook/infer/tree/master/infer) is a Facebook open
-source project for statically analyzing source code in order to find errors.
-You can see `Infer`'s use of `Reason`
-[here](https://github.com/facebook/infer/tree/master/infer/src/IR).
-The `Infer` team along with other members of industry are major contributors to
-`Reason`.
-
-
-
-###### Acknowledgments
-
-`Reason` is also a curation of best-in-class tools. It already incorporates
-several technologies that make the `Reason` developer
-experience possible.
-
-- `OCaml` itself.
-- `utop` - highly customizable repl.
-- `Merlin` - assistant for editing OCaml code that has extensively refactored
-in order to support `Reason`.
-
-
-What's Next + FAQ
-=========================
-
-#### What's Next:
-- Sandboxes for locally developing large projects of interconnected smaller packages.
-- Project scaffolding / build system (or merely build rules for existing systems).
-- Library curation (precompiled, fast installed libraries)
-- Improvements to syntax, iterating based on feedback.
-- Everything installable with a single command.
-
-
-#### FAQ
-
-- **Q**: Is `ppx` supported?
-- **A**: Support for `ppx` (lightweight macros for `ocaml`) is a goal which
-we've made good progress towards. You should be able to use all of your
-existing `ppx` plugins with `Reason`.
-
-
-- **Q**: Has something like this been tried before (a different syntax for `ocaml`)?
-- **A**: We're not aware of anything that takes `Reason`'s specific approach to
-syntax, which pushes the major syntax customization closer into the IDE space
-(and with a much greater focus on source formatting)
-while relying exclusively on the new `ppx` extensions for macro-like
-extensibility. `ppx` did not exist until recently and its existence
-dramatically influences the approach/focus.
-
-
-- **Q**: I don't like one of the syntax features.
-- **A**: We are still iterating based on feedback we've received, and there's a good
-chance other people feel similarly. For now, we've focused mostly on putting
-all the right tools in place specifically so that we can easily make changes in
-response to feedback or proposals, without having to be locked into design
-decisions. Please discuss specific requests on the [Reason
-project](https://github.com/facebook/reason) page.
-
-- **Q**: I don't like semicolons, because they make code less "functional".
-- **A**: Please see the last question/answer. For the specific case of semicolons,
-it is false that semicolons make code any more or less functional, and at least
-in `Reason`, semicolons are simply used as a delimiter that assist in formatting
-and interleaving of comments. The `;` delimiter could just has easily have been
-the word `in`, or the monkey emoji `🐒`. It should also be possible to remove
-the need for these delimiters in all but a few cases.
-
-
-####Contribute via `npm`
-
-**1. Clone `Reason`** and run `npm` install to build everything.
-
-```sh
-git clone git+ssh://git@github.com/facebook/Reason.git
-cd Reason
+git clone https://github.com/reasonml/ReasonProject.git
+cd ReasonProject
 npm install
 ```
 
-**2. Make changes to code and rebuild.** Run `npm run test` to make sure the test
-cases still pass, and clean if necessary.
+## Project Commands
+
+Once built, `ReasonProject` generates an *environment* that you can temporarily
+load when executing commands. The environment contains an enhanced `PATH`
+containing binaries built by your dependencies, but this environment isn't
+loaded into your global path. Some `npm run` commands have been setup to allow
+you to run some basic tasks, as well as any custom command, all within the
+project environment.
+
+
+
+### Run, Change, Rebuild
+
+There are a couple of built in commands declared in `package.json` that you can
+execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
+and `"npm run clean"`. You can also [add your
+own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+which give you a nicer alias like `npm run myScriptName`.
+
 
 ```sh
-npm run clean
-npm run build
-npm run test
+npm run reasonBuild  # Rebuilds after changing
+npm run start        # Runs the compiled app
+npm run clean        # Clean if you need to!
 ```
 
-> Note: A few of `Reason`'s dependencies don't like to be moved around once
-> they've been built, so don't `mv` the `Reason` root directory after
-> it has been built.
-
-###### Testing another project against your `Reason` changes.
-
-If you use a project like
-[`ExampleProject`](https://github.com/reasonml/exampleproject) that depends on
-`Reason`, symlink from `YourProject/node_modules/reason` to your local build of
-`Reason`, then rebuild your project.  (Note: `npm link` may not work).
+A single test file `./src/Test.re` is included. Make a simple change to it and
+then run the commands above to see it effect the output.
 
 
-####Contribute via `opam`
+### REPL
 
-*After* setting up `OPAM` and your `switch` in the general [installation
-instructions](./index.html#reason-install), do the following to live on the
-bleeding edge and make changes to `Reason`.
-
-**1. Ensure a Clean Slate:**
-These commands remove any versions of packages you might
-have installed in the stable [installation
-instructions](./index.html#reason-install).
-```sh
-opam pin remove merlin
-opam pin remove merlin_extend
-opam pin remove reason
-```
-
-**2. `pin` the `master` versions of everything:**
-See [INSTALL STABLE](https://github.com/facebook/reason/blob/master/README.md#install-stable)
-for up to date instructions.
-
-**3. Clone `Reason` and `pin` that local clone:** Pinning your locally built
-`Reason` clone makes your local build of `Reason` visible globally.
+The `rtop` REPL is built into the sandbox. The command `npm run top` starts the
+REPL.
 
 ```sh
-git clone git+ssh://git@github.com/facebook/Reason.git
-cd Reason
-make
-opam pin add -y reason .
+# Opens `rtop` from the sandbox.
+npm run top
 ```
 
-**4. Make Changes and `upgrade`:**
-When you make changes to `Reason`, and build successfully, those changes don't
-take effect in the globally installed version of `Reason` until you `upgrade`
-`Reason`.
+
+### Custom Commands
+
+To do anything beyond those basic, preconfigured commands, you just prefix your
+command with `npm run env --`. You should pass the *actual* command you want to
+run after `--`.
 
 ```sh
-# Test changes
-cd Reason
-make
-opam upgrade reason
+# By default nothing is found!
+which refmt
+
+ > Not Found!
+
+# Prefix with "npm run env --" and it finds it!
+npm run env -- which refmt
+
+ > ~/ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt
 ```
 
+If this becomes tedious, you can [add your
+own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+so that you can do `npm run yourScriptName` instead.
+
+## Editor Support
+
+#### Prepare Your Editor
+
+All of the IDE plugins, including integration with error highlighting,
+autocomplete, and syntax highlighting are included inside of the built project.
+
+Configure your `EDITOR` to load the `Reason` plugins from your instance of
+`ReasonProject`. See the instructions for
+[Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+
+#### IDE support included.
+
+The editor config above mostly exists to load the *actual* editor support, from
+the `ReasonProject` build. The only thing we need is to make sure the `PATH`
+contains all the important stuff from `ReasonProject`'s build.  There are two
+approaches: one continues to avoid global variables (as we've done so far), and
+the other doesn't.
+
+##### Avoiding Global Paths
+
+You can continue to develop entirely in the isolated sandbox without polluting
+global environment variables, by opening your editor within the sandbox
+environment:
+
+```sh
+npm run env -- vim
+npm run env -- atom
+npm run env -- mvim
+```
+
+Because you've [prepared your
+editor](#reasonproject-get-started-editor-support)
+to load editor support from the environment, `npm run env -- yourEditor`
+ensures that your editor will find the editor support in your environment
+variables.
+
+> Note: If you use `atom`, and already have `opam` installed, then there's a
+> known issue where `atom` has problems loading, but you can fix it easily by
+> commenting out any part in your `bashrc` that sources opam environments.  We
+> will come up with a long term solution at some point.
+
+##### Using Global Paths
+
+Pure sandboxed based development doesn't always work for certain workflows.
+(prefixing *all* commands with `npm run` may not work well). In that case, you
+can easily inject your successfully built project's environment into the global
+`PATH`, by putting the following in your `.bashrc`:
+
+```sh
+# In your .bashrc
+pushd ~/pathTo/ReasonProject/ && \
+  eval $(~/pathTo/ReasonProject/node_modules/.bin/dependencyEnv) && \
+  popd
+```
+
+
+## Developing Your Project
+
+### Making It Yours
+`ReasonProject` is meant to be the starting point of your own project. You'll want
+to make use of existing libraries in your app, so 
+browse the growing set of `opam` packages ported to `npm` under
+[`opam-alpha`](https://www.npmjs.com/~opam-alpha#packages). If there's something
+that hasn't yet been ported from `opam`, make a pull request to
+[this repo](https://github.com/yunxing/opam-npm/) and the package will automatically
+be ported (as soon as the daemon picks it up).
+
+##### Add Another Dependency
+
+**Option `1`:** Install a dependency into the project sandbox, and use `--save`
+so that your `package.json` is updated.
+
+```sh
+npm install --save @opam-alpha/cstruct
+```
+
+**Option `2`:** Edit the `package.json` manually to include your new dependency and run `npm install`.
+
+> Note: Sometimes options `1` and `2` above fail because some *other*
+> dependency that is rebuilt as a result of the `install` was not designed to
+> build in an idempotent manner.  In that case, just add the new dependency to
+> your `package.json` `"dependencies"`, `rm -r node_modules`, and then run `npm
+> install`. This installs from a clean slate.
+
+
+> Note: `opam-alpha` is "alpha" - we may move to a new namespace `opam-beta`
+> once we apply the lessons we've learned from `opam-alpha`. All the should
+> exist as they are, but a next generation `opam-beta` universe on `npm` would
+> have everything `opam-alpha` has (and then some). The work to upgrade your
+> projects will likely be minimal.
+
+
+This merely adds and builds the dependency. It doesn't mean your build system
+will know to link to it. Accomplishing that is build system dependent, but if
+using the example build system (`rebuild`, which is based on `ocamlbuild`), you
+can get an idea for the options by doing `npm run buildHelp`. Typically you
+need to configure the `reasonBuild` entry in `package.json` to add the `-pkg
+dependencyPackage`. Consult your dependency's docs.
+
+### Add Your Own Scripts
+
+`npm` allows `scripts` to be specified in your project's `package.json`.  These
+`scripts` are a named set of commands. A few scripts have special meaning, such
+as the `postinstall` script.
+
+> The `postinstall` script is how your project compiles itself. It is
+> guaranteed that the `postinstall` script executes any time you run `npm
+> install` in this package, or any time another package installs you as a
+> dependency. You're also guaranteed that your `postinstall` script is executed
+> *after* all of your dependencies' `postinstall` scripts.
+
+You can add new named scripts in the `package.json` `scripts` field. Once
+added, you can then run them via `npm run scriptName` from within the project
+root.
+
+###### Making Sure Your Scripts See The Environment
+
+`eval $(dependencyEnv)` is commonly used in these `scripts`. This `eval`
+statement augments the environment for the duration of the named script, which
+ensures that important binaries (such as `refmt`) are in the `PATH`.
+
+> When the entire purpose of developer tools is to generate a binary (such as a
+> compiler) to be included in your `PATH`, or produce a library whose path
+> should be specified in an special environment variable, it's almost like the
+> environment variable is the public API of that package.  `dependencyEnv`
+> allows your script to see the environment variables that your immediate
+> dependencies wanted to publish as their public API. You can learn how
+> packages can publish environment variables in the [dependency-env
+> repo](https://github.com/npm-ml/dependency-env).
+
+### Multiple Projects
+
+You can have multiple clones/forks/builds of `ReasonProject` - one for each of
+your projects. When you make changes, you can share the project easily with
+anyone else because you are modelling all dependencies via `package.json`. If
+also [using the global
+environment](#reasonproject-editor-support), you may want to
+designate one special `ReasonProject`, that is only used for augmenting the
+global path.
+
+
+### Creating Libraries
+
+`ReasonProject` sets up your environment for building an application. We
+haven't yet mentioned how to then share your work with other people *as* an
+`npm` dependency itself. More coming soon.
+
+
+## Troubleshooting
+
+In general, if something goes wrong, try deleting the local `node_modules`
+directory that was installed, and then try reinstalling using `npm install -f`
+(to avoid using a stale cache). Then if that doesn't work, follow the following
+steps to debug your specific failed dependency.
+
+#### Debugging Failed Dependencies
+
+When `npm install` fails to install one of your dependencies, it's typically
+because a `postinstall` step of a package has failed. Read the logs to
+determine which one is failing. `npm` will delete the directory of the failed
+package so the failed install won't be in `node_modules`, but you can
+usually try to reinstall it explicitly, and debug the installation. Suppose the
+`@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
+we can debug it.
+
+#####Do a dry run:
+Let's see what an `npm install` for this package *would* install. The `--dry-run`
+flag avoids actually installing anything.
+
+```sh
+npm install --dry-run @opam-alpha/qcheck 
+```
+
+In my project, it says it would only need to install the following packages.
+That's because all of the other ones must have already been installed in
+`node_modules`.
+
+```sh
+# Output
+test@1.0.0 /Users/jwalke/Desktop/tmp
+└─┬ @opam-alpha/qcheck@0.4.0 
+  └── qcheck-actual@0.4.0 (git://github.com/npm-opam/qcheck.git)
+```
+> Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
+package. That's okay.
+
+###### Install Source Without Building
+So we want to install that now, but *without* executing the install scripts so we
+pass the `--ignore-scripts` flag. Without that flag, it would fail when running
+the scripts again, and then remove the package again!
+
+```sh
+npm install --ignore-scripts @opam-alpha/qcheck@0.4.0
+```
+
+This will just install the source code, and let us know what it actually installed.
+
+###### Try The Build Manually, In Place
+Now, make sure `npm` didn't do something weird with installing new versions of package
+that didn't show up in the dry run, and make sure it installed things
+as flat as possible in `node_modules`, as opposed to nesting `node_modules`
+for compiled ocaml packages inside of other `node_modules`. Ideally, everything
+is a flat list inside the `ReasonProject/node_modules` directory.
+
+`cd` into the package that was failing to build correctly (it was actually the `qcheck-actual` package
+in our case). Run the build command in `package.json`'s `postinstall` field by doing `npm run postinstall`.
+
+```sh
+cd node_modules/qcheck-actual
+npm run postinstall
+```
+
+Now the package should fail as it did when you tried to install your top level project,
+but without removing the packages, so you can debug the issue, fix it, then try rebuilding
+again. Usually you need to reconfigure the problematic package, or fix the build script.
+Fix it, and push an update for the package.
+
+Finally, once you've pushed a fix to the package for the issue, `rm`
+the entire project's `node_modules` directory and re-run `npm install`
+from the top again. This just makes sure you've got everything
+nice and clean as if you installed it for the first time.
+
+
+```
+npm run whereisocamlmerlin
+```
+    
   </script>
 
   <!-- Initializer -->
@@ -1415,13 +373,11 @@ opam upgrade reason
   <meta property="og:image:width" content="1196" />
   <meta property="og:image:height" content="1228" />
 
-  <meta content="Reason: Rapid Expressive Systems Programming." name="description">
-  <meta content="Reason: Rapid Expressive Systems Programming." property="og:description">
-  <!-- <meta content="http://ricostacruz.com/flatdoc/support/preview.jpg" property="og:image"> -->
+  <meta content="Reason Project: Build Reason Projects Rapidly" name="description">
+  <meta content="Reason Project: Build Reason Projects Rapidly" property="og:description">
+  <meta content="http://facebook.github.io/reason/images/logo.png" property="og:image">
 </head>
 <body role='flatdoc' class='big-h3 large-brief'>
-
-  <!-- <div class='title&#45;area title&#45;card' style='background&#45;image: url(support/blur.jpg)'> -->
 
   <div class='title-area title-card'>
     <div class='in'>
@@ -1431,11 +387,9 @@ opam upgrade reason
 
   <div class='header'>
     <div class='left'>
-      <h1><a href='index.html'>Reason</a></h1>
+      <h1><a href='index.html'>Reason Project</a></h1>
       <ul>
-        <li><a href='projects.html'>Projects</a></li>
-        <li><a href='tools.html'>Tools</a></li>
-        <li><a href='https://github.com/facebook/reason'>GitHub</a></li>
+        <li><a href='https://github.com/reasonml/ReasonProject'>GitHub</a></li>
       </ul>
     </div>
   </div>
