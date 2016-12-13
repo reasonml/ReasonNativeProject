@@ -24,6 +24,13 @@
 
     "Note: `rebuild` has nothing to do with the officially supported `npm rebuild` command."
   ],
+  "exportedEnvVars": {
+    "OCAMLRUNPARAM": {
+      "global": true,
+      "globalCollisionBehavior": "fail",
+      "val": "b"
+    }
+  },
   "scripts": {
 
     "postinstall": "npm run reasonBuild",
