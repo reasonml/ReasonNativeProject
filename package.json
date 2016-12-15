@@ -1,5 +1,5 @@
 {
-  "name": "ExampleProject",
+  "name": "ReasonProject",
   "version": "0.0.1",
   "description": "Example project with Reason as a dependency",
   "repository": {
@@ -46,10 +46,13 @@
     "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
 
   },
+  "devDependencies": {
+    "@opam-alpha/merlin": "^ 2.5.0"
+  },
   "dependencies": {
     "reason": "^ 1.4.0",
-    "@opam-alpha/merlin": "^ 2.5.0",
     "@opam-alpha/ocaml": "4.2.3",
+    "fastrealpath": "^0.1.0",
     "nopam": "^0.1.0",
     "dependency-env": "^0.0.1"
   },
