@@ -127,21 +127,18 @@ so that you can do `npm run yourScriptName` instead.
 
 #### Prepare Your Editor
 
-All of the IDE plugins, including integration with error highlighting,
-autocomplete, and syntax highlighting are included inside of the built project.
-
-Configure your `EDITOR` to load the `Reason` plugins from your instance of
-`ReasonProject`. See the instructions for
+Configure your editor to load the `Reason` plugins. See the instructions for
 [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
-[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason)
+and [emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
 
 #### IDE support included.
 
-The editor config above mostly exists to load the *actual* editor support, from
-the `ReasonProject` build. The only thing we need is to make sure the `PATH`
-contains all the important stuff from `ReasonProject`'s build.  There are two
-approaches: one continues to avoid global variables (as we've done so far), and
-the other doesn't.
+The editor configurations above prepare your editor to load the *actual* editor
+support, from the `ReasonProject` build. The only thing we need is to make sure the `PATH`
+contains all the important stuff from `ReasonProject`'s build at the time we launch
+our editor.  There are two approaches: one continues to avoid global variables
+(as we've done so far), and the other doesn't.
 
 ##### Avoiding Global Paths
 
