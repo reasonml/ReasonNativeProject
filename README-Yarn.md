@@ -14,9 +14,7 @@ Example project using Reason as an `yarn` dependency.
 
 [yarn](https://yarnpkg.com/) is a fast, reliable, and secure dependency management tool. You can now use yarn to install reason and manage its dependencies.
 
-```
-npm install -g yarn
-```
+To install Yarn, it is best to [consult the official documentation](https://yarnpkg.com/en/docs/install) for your particular platform.
 
 ## Get started:
 ```sh
