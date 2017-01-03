@@ -60,6 +60,11 @@ cd ReasonProject
 npm install
 ```
 
+> Note: Disable any `ocaml` global compilers you have in your `PATH`. If you already
+have an ocaml compiler installed via `opam`, disable the line in your `~/.bashrc`
+that sources the `opam` environment. You may even want to uninstall any `ocaml`
+compilers that you installed via `brew`. (We are working on a fix to this problem).
+
 ## Project Commands
 
 Once built, `ReasonProject` generates an *environment* that you can temporarily
@@ -276,6 +281,14 @@ In general, if something goes wrong, try deleting the local `node_modules`
 directory that was installed, and then try reinstalling using `npm install -f`
 (to avoid using a stale cache). Then if that doesn't work, follow the following
 steps to debug your specific failed dependency.
+
+Also, remember to disable any system ocaml compilers that you have in your PATH.
+For example, if you installed an OCaml compiler via opam, comment out the line in
+your `~/.bashrc` or `~/.bash_profile` that source the opam environment,
+and then open a new shell.
+
+> Note: We will soon make it impossible for these kinds of conflicts to occur.
+
 
 #### Debugging Failed Dependencies
 
