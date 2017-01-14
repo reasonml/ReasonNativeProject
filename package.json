@@ -17,11 +17,9 @@
     "The scripts can be invoked with `npm run scriptNamed`.",
     "`dependencyEnv` ensure the environment is set up correctly to include",
     "build artifacts from your dependencies.",
-
     "npm run reasonBuild uses a program called `rebuild` which is included with Reason ",
     "to build very simple test projects. `refmterr` processes stderr to print type errors ",
     "more beautifully.",
-
     "Note: `rebuild` has nothing to do with the officially supported `npm rebuild` command."
   ],
   "exportedEnvVars": {
@@ -32,19 +30,16 @@
     }
   },
   "scripts": {
-
     "postinstall": "npm run reasonBuild",
     "buildHelp": "eval $(dependencyEnv) && nopam && rebuild --help",
     "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -use-ocamlfind -cflag -w -cflag -40 -I src ./src/Test.native 2>&1 | refmterr",
     "reasonbuild": "npm run reasonBuild",
-
     "start": "eval $(dependencyEnv) && ./_build/src/Test.native",
     "clean": "rm -r ./_build",
     "top": "eval $(dependencyEnv) && rtop",
     "env": "eval $(dependencyEnv) && env",
     "editor": "eval $(dependencyEnv) && eval $EDITOR",
     "whereisocamlmerlin": "eval $(dependencyEnv) && which ocamlmerlin-reason"
-
   },
   "devDependencies": {
     "@opam-alpha/merlin": "^ 2.5.0"
@@ -52,11 +47,11 @@
   "dependencies": {
     "reason": "^ 1.4.0",
     "@opam-alpha/ocaml": "4.2.3",
+    "dependency-env": "^0.1.1",
     "fastrealpath": "^0.1.0",
-    "nopam": "^0.1.0",
-    "dependency-env": "^0.0.1"
+    "nopam": "^0.1.0"
   },
-  "engines" : {
-    "npm" : ">=3.10.0"
+  "engines": {
+    "npm": ">=3.10.0"
   }
 }
