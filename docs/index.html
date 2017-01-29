@@ -226,6 +226,8 @@ can get an idea for the options by doing `npm run buildHelp`. Typically you
 need to configure the `reasonBuild` entry in `package.json` to add the `-pkg
 dependencyPackage`. Consult your dependency's docs.
 
+Don't forget to add your new dependency also to the `.merlin` (configuration)[https://github.com/ocaml/merlin/wiki/emacs-from-scratch#using-libraries] with `PKG dependencyPackage` so that your editor knows about it too.
+
 ### Add Your Own Scripts
 
 `npm` allows `scripts` to be specified in your project's `package.json`.  These
