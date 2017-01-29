@@ -130,14 +130,14 @@ so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
 
-#### Prepare Your Editor
+### Prepare Your Editor
 
 Configure your editor to load the `Reason` plugins. See the instructions for
 [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
 [Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason)
 and [emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
 
-#### IDE support included.
+### IDE support included.
 
 The editor configurations above prepare your editor to load the *actual* editor
 support, from the `ReasonProject` build. The only thing we need is to make sure the `PATH`
@@ -145,7 +145,7 @@ contains all the important stuff from `ReasonProject`'s build at the time we lau
 our editor.  There are two approaches: one continues to avoid global variables
 (as we've done so far), and the other doesn't.
 
-##### Avoiding Global Paths
+#### Avoiding Global Paths
 
 You can continue to develop entirely in the isolated sandbox without polluting
 global environment variables, by opening your editor within the sandbox
@@ -168,7 +168,7 @@ variables.
 > commenting out any part in your `bashrc` that sources opam environments.  We
 > will come up with a long term solution at some point.
 
-##### Using Global Paths
+#### Using Global Paths
 
 Pure sandboxed based development doesn't always work for certain workflows.
 (prefixing *all* commands with `npm run` may not work well). In that case, you
@@ -194,7 +194,7 @@ that hasn't yet been ported from `opam`, make a pull request to
 [this repo](https://github.com/yunxing/opam-npm/) and the package will automatically
 be ported (as soon as the daemon picks it up).
 
-##### Add Another Dependency
+#### Add Another Dependency
 
 **Option `1`:** Install a dependency into the project sandbox, and use `--save`
 so that your `package.json` is updated.
@@ -290,7 +290,7 @@ and then open a new shell.
 > Note: We will soon make it impossible for these kinds of conflicts to occur.
 
 
-#### Debugging Failed Dependencies
+### Debugging Failed Dependencies
 
 When `npm install` fails to install one of your dependencies, it's typically
 because a `postinstall` step of a package has failed. Read the logs to
@@ -300,7 +300,7 @@ usually try to reinstall it explicitly, and debug the installation. Suppose the
 `@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
 we can debug it.
 
-#####Do a dry run:
+####Do a dry run:
 Let's see what an `npm install` for this package *would* install. The `--dry-run`
 flag avoids actually installing anything.
 
@@ -321,7 +321,7 @@ test@1.0.0 /Users/jwalke/Desktop/tmp
 > Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
 package. That's okay.
 
-###### Install Source Without Building
+##### Install Source Without Building
 So we want to install that now, but *without* executing the install scripts so we
 pass the `--ignore-scripts` flag. Without that flag, it would fail when running
 the scripts again, and then remove the package again!
@@ -332,7 +332,7 @@ npm install --ignore-scripts @opam-alpha/qcheck@0.4.0
 
 This will just install the source code, and let us know what it actually installed.
 
-###### Try The Build Manually, In Place
+##### Try The Build Manually, In Place
 Now, make sure `npm` didn't do something weird with installing new versions of package
 that didn't show up in the dry run, and make sure it installed things
 as flat as possible in `node_modules`, as opposed to nesting `node_modules`
