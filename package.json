@@ -32,7 +32,7 @@
   "scripts": {
     "postinstall": "npm run reasonBuild",
     "buildHelp": "eval $(dependencyEnv) && nopam && rebuild --help",
-    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -use-ocamlfind -cflag -w -cflag -40 -I src ./src/Test.native 2>&1 | berror.native --path-to-refmttype refmttype",
+    "reasonBuild": "eval $(dependencyEnv) && nopam && rebuild -use-ocamlfind -cflag -w -cflag -40 -I src ./src/Test.native",
     "reasonbuild": "npm run reasonBuild",
     "start": "eval $(dependencyEnv) && ./_build/src/Test.native",
     "clean": "rm -r ./_build",
@@ -45,8 +45,7 @@
     "@opam-alpha/merlin": "^ 2.5.0"
   },
   "dependencies": {
-    "ocamlBetterErrors": "0.1.0",
-    "reason": "^ 1.6.0",
+    "reason": "^ 1.9.0",
     "@opam-alpha/ocaml": "4.2.3",
     "dependency-env": "^0.1.1",
     "nopam": "^0.1.0"
