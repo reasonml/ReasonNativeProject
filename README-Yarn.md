@@ -122,7 +122,7 @@ We will come up with a long term solution at some point.
   compiled into.
 
 ```
-npm run whereisreason
+npm run whereisocamlmerlin
 ```
 
 
