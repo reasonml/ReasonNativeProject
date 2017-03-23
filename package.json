@@ -45,7 +45,7 @@
     "@opam-alpha/merlin": "^ 2.5.0"
   },
   "dependencies": {
-    "reason": "^ 1.9.0",
+    "reason": "1.9.0",
     "@opam-alpha/ocaml": "4.2.3",
     "dependency-env": "^0.1.1",
     "nopam": "^0.1.0"
