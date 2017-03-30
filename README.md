@@ -54,7 +54,7 @@ project environment.
 There are a couple of built in commands declared in `package.json` that you can
 execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
 and `"npm run clean"`. You can also [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+own](#add-your-own-scripts) named scripts
 which give you a nicer alias like `npm run myScriptName`.
 
 
@@ -98,7 +98,7 @@ npm run env -- which refmt
 ```
 
 If this becomes tedious, you can [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+own](#add-your-own-scripts) named scripts
 so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
