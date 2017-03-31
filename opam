@@ -3,8 +3,8 @@ name: "ReasonProject"
 version: "0.0.1"
 maintainer: "Jordan Walke <jordojw@gmail.com>"
 authors: [
-    "Jordan Walke <jordojw@gmail.com>"
-    "Maxwell Bernstein <max@bernsteinbear.com>"
+  "Jordan Walke <jordojw@gmail.com>"
+  "Maxwell Bernstein <max@bernsteinbear.com>"
 ]
 license: "BSD"
 homepage: "https://github.com/reasonml/ReasonProject"
@@ -14,7 +14,7 @@ dev-repo: "git://github.com/reasonml/ReasonProject.git"
 tags: [ "reason" "example" ]
 substs: [ "pkg/META" ]
 build: [
-  [make "build" "--native" "%{ocaml-native}%"]
+  [make "build"]
 ]
 depends: [
   "topkg"         {>=  "0.8.1" & < "0.9"}
