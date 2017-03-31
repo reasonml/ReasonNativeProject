@@ -1,4 +1,5 @@
 build:
+	cp pkg/META.in pkg/META
 	ocamlbuild -package topkg pkg/build.native
 	./build.native build
 

@@ -15,5 +15,6 @@ _build/**
 *.native
 *.byte
 *.install
+pkg/META
 
 node_modules
