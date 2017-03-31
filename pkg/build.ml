@@ -13,7 +13,5 @@ let () =
   Pkg.describe "ReasonProject" ~build ~change_logs:[] ~licenses:[] ~readmes:[] @@ fun c ->
     Ok [
       Pkg.lib "pkg/META";
-      Pkg.bin ~auto:true
-              ~dst:"test"
-              "src/Test";
+      Pkg.bin ~auto:true ~dst:"test" "src/Test";
     ]
