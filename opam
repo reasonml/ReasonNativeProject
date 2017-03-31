@@ -1,0 +1,23 @@
+opam-version: "1.2"
+name: "ReasonProject"
+version: "0.0.1"
+maintainer: "Jordan Walke <jordojw@gmail.com>"
+authors: [
+    "Jordan Walke <jordojw@gmail.com>"
+    "Maxwell Bernstein <max@bernsteinbear.com>"
+]
+license: "BSD"
+homepage: "https://github.com/reasonml/ReasonProject"
+doc: "https://reasonml.github.io/ReasonProject/"
+bug-reports: "https://github.com/reasonml/ReasonProject/issues"
+dev-repo: "git://github.com/reasonml/ReasonProject.git"
+tags: [ "reason" "example" ]
+substs: [ "pkg/META" ]
+build: [
+  [make "build" "--native" "%{ocaml-native}%"]
+]
+depends: [
+  "topkg"         {>=  "0.8.1" & < "0.9"}
+  "reason-parser" {= "1.13.3"}
+]
+available: [ ocaml-version >= "4.02" & ocaml-version < "4.05" ]
