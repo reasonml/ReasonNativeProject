@@ -35,7 +35,7 @@ development environments via `npm`.
 `ReasonProject` installs the `Reason` toolchain into a local directory using
 `npm`.  `ReasonProject` can therefore be used as a template for new projects,
 but can also be used to install the toolchain [into the global
-environment](#reasonproject-editor-support).  `ReasonProject` includes: the
+environment](#editor-support).  `ReasonProject` includes: the
 compiler toolchain, the source formatter, REPL, and IDE support for popular
 editors.
 
@@ -78,11 +78,11 @@ project environment.
 
 ### Run, Change, Rebuild
 
-There are a couple of built in commands declared in `package.json` that you can
-execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
-and `"npm run clean"`. You can also [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
-which give you a nicer alias like `npm run myScriptName`.
+There are a couple of built in commands declared in `package.json` that you
+can execute via `npm run`. For example: `"npm run start"`, `"npm run
+reasonBuild"` and `"npm run clean"`. You can also
+[add your own](#add-your-own-scripts) named scripts which give you a nicer
+alias like `npm run myScriptName`.
 
 
 ```sh
@@ -124,28 +124,31 @@ npm run env -- which refmt
  > ~/ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt
 ```
 
-If this becomes tedious, you can [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
-so that you can do `npm run yourScriptName` instead.
+If this becomes tedious, you can [add your own](#add-your-own-scripts) named
+scripts so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
 
-### Prepare Your Editor
+#### Prepare Your Editor
 
-Configure your editor to load the `Reason` plugins. See the instructions for
+All of the IDE plugins, including integration with error highlighting,
+autocomplete, and syntax highlighting are included inside of the built project.
+
+Configure your `EDITOR` to load the `Reason` plugins from your instance of
+`ReasonProject`. See the instructions for
 [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
-[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason)
-and [emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason) and
+[Emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
 
-### IDE support included.
+#### IDE support included.
 
-The editor configurations above prepare your editor to load the *actual* editor
-support, from the `ReasonProject` build. The only thing we need is to make sure the `PATH`
-contains all the important stuff from `ReasonProject`'s build at the time we launch
-our editor.  There are two approaches: one continues to avoid global variables
-(as we've done so far), and the other doesn't.
+The editor config above mostly exists to load the *actual* editor support, from
+the `ReasonProject` build. The only thing we need is to make sure the `PATH`
+contains all the important stuff from `ReasonProject`'s build.  There are two
+approaches: one continues to avoid global variables (as we've done so far), and
+the other doesn't.
 
-#### Avoiding Global Paths
+##### Avoiding Global Paths
 
 You can continue to develop entirely in the isolated sandbox without polluting
 global environment variables, by opening your editor within the sandbox
@@ -155,10 +158,11 @@ environment:
 npm run env -- vim
 npm run env -- atom
 npm run env -- mvim
+npm run env -- emacs
 ```
 
 Because you've [prepared your
-editor](#reasonproject-get-started-editor-support)
+editor](#editor-support)
 to load editor support from the environment, `npm run env -- yourEditor`
 ensures that your editor will find the editor support in your environment
 variables.
@@ -168,7 +172,11 @@ variables.
 > commenting out any part in your `bashrc` that sources opam environments.  We
 > will come up with a long term solution at some point.
 
-#### Using Global Paths
+> Note: On MacOS, `emacs` may refer to the system emacs, which is often not
+> the variant you've installed. To open standard emacs for example, run `npm
+> run env -- open -a Emacs`
+
+##### Using Global Paths
 
 Pure sandboxed based development doesn't always work for certain workflows.
 (prefixing *all* commands with `npm run` may not work well). In that case, you
@@ -194,7 +202,7 @@ that hasn't yet been ported from `opam`, make a pull request to
 [this repo](https://github.com/yunxing/opam-npm/) and the package will automatically
 be ported (as soon as the daemon picks it up).
 
-#### Add Another Dependency
+##### Add Another Dependency
 
 **Option `1`:** Install a dependency into the project sandbox, and use `--save`
 so that your `package.json` is updated.
@@ -225,8 +233,6 @@ using the example build system (`rebuild`, which is based on `ocamlbuild`), you
 can get an idea for the options by doing `npm run buildHelp`. Typically you
 need to configure the `reasonBuild` entry in `package.json` to add the `-pkg
 dependencyPackage`. Consult your dependency's docs.
-
-Don't forget to add your new dependency also to the `.merlin` (configuration)[https://github.com/ocaml/merlin/wiki/emacs-from-scratch#using-libraries] with `PKG dependencyPackage` so that your editor knows about it too.
 
 ### Add Your Own Scripts
 
@@ -265,7 +271,7 @@ You can have multiple clones/forks/builds of `ReasonProject` - one for each of
 your projects. When you make changes, you can share the project easily with
 anyone else because you are modelling all dependencies via `package.json`. If
 also [using the global
-environment](#reasonproject-editor-support), you may want to
+environment](#editor-support), you may want to
 designate one special `ReasonProject`, that is only used for augmenting the
 global path.
 
@@ -291,8 +297,7 @@ and then open a new shell.
 
 > Note: We will soon make it impossible for these kinds of conflicts to occur.
 
-
-### Debugging Failed Dependencies
+#### Debugging Failed Dependencies
 
 When `npm install` fails to install one of your dependencies, it's typically
 because a `postinstall` step of a package has failed. Read the logs to
@@ -302,7 +307,7 @@ usually try to reinstall it explicitly, and debug the installation. Suppose the
 `@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
 we can debug it.
 
-####Do a dry run:
+##### Do a dry run:
 Let's see what an `npm install` for this package *would* install. The `--dry-run`
 flag avoids actually installing anything.
 
@@ -323,7 +328,7 @@ test@1.0.0 /Users/jwalke/Desktop/tmp
 > Note: Sometimes it won't traverse `git` dependencies to find all the potentially installed
 package. That's okay.
 
-##### Install Source Without Building
+###### Install Source Without Building
 So we want to install that now, but *without* executing the install scripts so we
 pass the `--ignore-scripts` flag. Without that flag, it would fail when running
 the scripts again, and then remove the package again!
@@ -334,7 +339,7 @@ npm install --ignore-scripts @opam-alpha/qcheck@0.4.0
 
 This will just install the source code, and let us know what it actually installed.
 
-##### Try The Build Manually, In Place
+###### Try The Build Manually, In Place
 Now, make sure `npm` didn't do something weird with installing new versions of package
 that didn't show up in the dry run, and make sure it installed things
 as flat as possible in `node_modules`, as opposed to nesting `node_modules`
