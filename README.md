@@ -51,11 +51,11 @@ project environment.
 
 ### Run, Change, Rebuild
 
-There are a couple of built in commands declared in `package.json` that you can
-execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
-and `"npm run clean"`. You can also [add your
-own](#add-your-own-scripts) named scripts
-which give you a nicer alias like `npm run myScriptName`.
+There are a couple of built in commands declared in `package.json` that you
+can execute via `npm run`. For example: `"npm run start"`, `"npm run
+reasonBuild"` and `"npm run clean"`. You can also
+[add your own](#add-your-own-scripts) named scripts which give you a nicer
+alias like `npm run myScriptName`.
 
 
 ```sh
@@ -97,9 +97,8 @@ npm run env -- which refmt
  > ~/ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt
 ```
 
-If this becomes tedious, you can [add your
-own](#add-your-own-scripts) named scripts
-so that you can do `npm run yourScriptName` instead.
+If this becomes tedious, you can [add your own](#add-your-own-scripts) named
+scripts so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
 
@@ -281,7 +280,7 @@ usually try to reinstall it explicitly, and debug the installation. Suppose the
 `@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
 we can debug it.
 
-#####Do a dry run:
+##### Do a dry run:
 Let's see what an `npm install` for this package *would* install. The `--dry-run`
 flag avoids actually installing anything.
 
