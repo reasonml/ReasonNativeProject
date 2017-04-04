@@ -8,7 +8,7 @@ development environments via `npm`.
 `ReasonProject` installs the `Reason` toolchain into a local directory using
 `npm`.  `ReasonProject` can therefore be used as a template for new projects,
 but can also be used to install the toolchain [into the global
-environment](#reasonproject-editor-support).  `ReasonProject` includes: the
+environment](#editor-support).  `ReasonProject` includes: the
 compiler toolchain, the source formatter, REPL, and IDE support for popular
 editors.
 
@@ -51,11 +51,11 @@ project environment.
 
 ### Run, Change, Rebuild
 
-There are a couple of built in commands declared in `package.json` that you can
-execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
-and `"npm run clean"`. You can also [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
-which give you a nicer alias like `npm run myScriptName`.
+There are a couple of built in commands declared in `package.json` that you
+can execute via `npm run`. For example: `"npm run start"`, `"npm run
+reasonBuild"` and `"npm run clean"`. You can also
+[add your own](#add-your-own-scripts) named scripts which give you a nicer
+alias like `npm run myScriptName`.
 
 
 ```sh
@@ -97,9 +97,8 @@ npm run env -- which refmt
  > ~/ReasonProject/node_modules/reason/_build/ocamlfind/bin/refmt
 ```
 
-If this becomes tedious, you can [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
-so that you can do `npm run yourScriptName` instead.
+If this becomes tedious, you can [add your own](#add-your-own-scripts) named
+scripts so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
 
@@ -111,7 +110,8 @@ autocomplete, and syntax highlighting are included inside of the built project.
 Configure your `EDITOR` to load the `Reason` plugins from your instance of
 `ReasonProject`. See the instructions for
 [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
-[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason) and
+[Emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
 
 #### IDE support included.
 
@@ -131,10 +131,11 @@ environment:
 npm run env -- vim
 npm run env -- atom
 npm run env -- mvim
+npm run env -- emacs
 ```
 
 Because you've [prepared your
-editor](#reasonproject-get-started-editor-support)
+editor](#editor-support)
 to load editor support from the environment, `npm run env -- yourEditor`
 ensures that your editor will find the editor support in your environment
 variables.
@@ -143,6 +144,10 @@ variables.
 > known issue where `atom` has problems loading, but you can fix it easily by
 > commenting out any part in your `bashrc` that sources opam environments.  We
 > will come up with a long term solution at some point.
+
+> Note: On MacOS, `emacs` may refer to the system emacs, which is often not
+> the variant you've installed. To open standard emacs for example, run `npm
+> run env -- open -a Emacs`
 
 ##### Using Global Paths
 
@@ -239,7 +244,7 @@ You can have multiple clones/forks/builds of `ReasonProject` - one for each of
 your projects. When you make changes, you can share the project easily with
 anyone else because you are modelling all dependencies via `package.json`. If
 also [using the global
-environment](#reasonproject-editor-support), you may want to
+environment](#editor-support), you may want to
 designate one special `ReasonProject`, that is only used for augmenting the
 global path.
 
@@ -275,7 +280,7 @@ usually try to reinstall it explicitly, and debug the installation. Suppose the
 `@opam-alpha/qcheck` package failed to install. Let's recreate the failure so
 we can debug it.
 
-#####Do a dry run:
+##### Do a dry run:
 Let's see what an `npm install` for this package *would* install. The `--dry-run`
 flag avoids actually installing anything.
 
