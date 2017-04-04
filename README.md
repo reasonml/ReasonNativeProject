@@ -8,7 +8,7 @@ development environments via `npm`.
 `ReasonProject` installs the `Reason` toolchain into a local directory using
 `npm`.  `ReasonProject` can therefore be used as a template for new projects,
 but can also be used to install the toolchain [into the global
-environment](#reasonproject-editor-support).  `ReasonProject` includes: the
+environment](#editor-support).  `ReasonProject` includes: the
 compiler toolchain, the source formatter, REPL, and IDE support for popular
 editors.
 
@@ -54,7 +54,7 @@ project environment.
 There are a couple of built in commands declared in `package.json` that you can
 execute via `npm run`. For example: `"npm run start"`, `"npm run reasonBuild"`
 and `"npm run clean"`. You can also [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+own](#add-your-own-scripts) named scripts
 which give you a nicer alias like `npm run myScriptName`.
 
 
@@ -98,7 +98,7 @@ npm run env -- which refmt
 ```
 
 If this becomes tedious, you can [add your
-own](#reasonproject-developing-your-project-add-your-own-scripts) named scripts
+own](#add-your-own-scripts) named scripts
 so that you can do `npm run yourScriptName` instead.
 
 ## Editor Support
@@ -136,7 +136,7 @@ npm run env -- emacs
 ```
 
 Because you've [prepared your
-editor](#reasonproject-get-started-editor-support)
+editor](#editor-support)
 to load editor support from the environment, `npm run env -- yourEditor`
 ensures that your editor will find the editor support in your environment
 variables.
@@ -245,7 +245,7 @@ You can have multiple clones/forks/builds of `ReasonProject` - one for each of
 your projects. When you make changes, you can share the project easily with
 anyone else because you are modelling all dependencies via `package.json`. If
 also [using the global
-environment](#reasonproject-editor-support), you may want to
+environment](#editor-support), you may want to
 designate one special `ReasonProject`, that is only used for augmenting the
 global path.
 
