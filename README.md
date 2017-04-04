@@ -111,7 +111,8 @@ autocomplete, and syntax highlighting are included inside of the built project.
 Configure your `EDITOR` to load the `Reason` plugins from your instance of
 `ReasonProject`. See the instructions for
 [Atom](http://facebook.github.io/reason/tools.html#merlin-atom) and
-[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason).
+[Vim](https://github.com/facebook/reason/tree/master/editorSupport/VimReason) and
+[Emacs](https://github.com/facebook/reason/tree/master/editorSupport/emacs).
 
 #### IDE support included.
 
@@ -131,6 +132,7 @@ environment:
 npm run env -- vim
 npm run env -- atom
 npm run env -- mvim
+npm run env -- emacs
 ```
 
 Because you've [prepared your
@@ -143,6 +145,10 @@ variables.
 > known issue where `atom` has problems loading, but you can fix it easily by
 > commenting out any part in your `bashrc` that sources opam environments.  We
 > will come up with a long term solution at some point.
+
+> Note: On MacOS, `emacs` may refer to the system emacs, which is often not
+> the variant you've installed. To open standard emacs for example, run `npm
+> run env -- open -a Emacs`
 
 ##### Using Global Paths
 
