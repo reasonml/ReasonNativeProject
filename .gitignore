@@ -12,5 +12,9 @@ _build/**
 *.annot
 *.run
 *.opt
+*.native
+*.byte
+*.install
+pkg/META
 
 node_modules

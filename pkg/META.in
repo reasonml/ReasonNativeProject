@@ -1,0 +1,7 @@
+# Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+
+version = "%{version}%"
+description = "ReasonProject: Example project for Reason"
+
+archive(byte) = "ReasonProject.cma"
+archive(native) = "ReasonProject.cmxa"

@@ -1,9 +1,22 @@
-language: node_js
-os:
-  - linux
-  - osx
-node_js:
-  - "6"
-  - "6.1"
-  - "5.11"
-
+language: objective-c
+osx_image: xcode7.3
+before_install:
+  - brew update
+  - brew install opam
+  - opam init
+  - opam switch "$OCAML_VERSION"
+  - eval `opam config env`
+  - opam update
+before_script:
+  - opam pin add -y ReasonProject .
+script:
+  - ./test-with-version.sh "$OCAML_VERSION"
+  - git diff --exit-code
+env:
+  - OCAML_VERSION=4.02.3
+  - OCAML_VERSION=4.03.0
+  - OCAML_VERSION=4.04.0
+notifications:
+  email:
+    - yunxing@fb.com
+    - reason@cloudwalk.me
