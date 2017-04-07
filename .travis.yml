@@ -8,7 +8,7 @@ before_install:
   - eval `opam config env`
   - opam update
 before_script:
-  - opam pin add -y ReasonProject .
+  - opam pin add -y ReasonNativeProject .
 script:
   - ./test-with-version.sh "$OCAML_VERSION"
   - git diff --exit-code
