@@ -6,40 +6,35 @@ Installation of [`Reason`](http://facebook.github.io/reason/) project for native
 
 **Requirements**: [OPAM](https://opam.ocaml.org), the OCaml package manager.
 
-`ReasonNativeProject` installs the `Reason` toolchain into your global opam directory
-using `opam`. `ReasonNativeProject` can therefore be used as a template for new
-projects, but can also be used to install the toolchain [into the global
-environment](#reasonNativeproject-editor-support).  `ReasonNativeProject` includes: the
-compiler toolchain, the source formatter, REPL, and IDE support for popular
-editors.
-
 [![Build Status](https://travis-ci.org/reasonml/ReasonNativeProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonNativeProject)
 
 ## Install
 
-Install by cloning the repo and running the following commands. These commands
-install all dependencies.
+Clone the repo and install the dependencies:
 
 ```sh
 git clone https://github.com/reasonml/ReasonNativeProject.git
 cd ReasonNativeProject
+# opam will read into the `opam` file and add the other dependencies
 opam pin add -y ReasonNativeProject .
 ```
 
-### Run, Change, Rebuild
+### Build
 
 There are a couple of built-in commands in the `Makefile`.
 
 ```sh
-make build    # Rebuilds after changing
-make clean    # Clean if you need to!
+make build    # build/rebuild your files
+make clean    # clean the compiled artifacts
 ```
 
-A single test file `./src/Test.re` is included. Make a simple change to it and
+A single test file `./src/test.re` is included. Make a simple change to it and
 then run the commands above to see it effect the output.
 
+The built output is in `/_build`.
+
 The binary output will be in the project root directory -- to run it, type
-`./Test.byte`!
+`./test.byte`!
 
 ## Developing Your Project
 

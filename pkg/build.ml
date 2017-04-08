@@ -10,8 +10,8 @@ let () =
                                   %% of_list files)
   in
   let build = Pkg.build ~cmd () in
-  Pkg.describe "ReasonNativeProject" ~build ~change_logs:[] ~licenses:[] ~readmes:[] @@ fun c ->
+  Pkg.describe "ReasonNativeProject"~build ~change_logs:[] ~licenses:[] ~readmes:[] (fun c ->
     Ok [
       Pkg.lib "pkg/META";
-      Pkg.bin ~auto:true ~dst:"test" "src/Test";
-    ]
+      Pkg.bin ~auto:true ~dst:"test" "src/test";
+    ])
