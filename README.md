@@ -31,10 +31,7 @@ make clean    # clean the compiled artifacts
 A single test file `./src/test.re` is included. Make a simple change to it and
 then run the commands above to see it effect the output.
 
-The built output is in `/_build`.
-
-The binary output will be in the project root directory -- to run it, type
-`./test.byte`!
+The built output is in `_build`. Try running it with `_build/src/test.native`.
 
 ## Developing Your Project
 

@@ -1,4 +1,4 @@
-(* Copyright (c) 2015-present, Facebook, Inc. All rights reserved. *)
+(* http://erratique.ch/software/topkg/doc/Topkg.html#basics *)
 
 open Topkg
 
@@ -10,7 +10,7 @@ let () =
                                   %% of_list files)
   in
   let build = Pkg.build ~cmd () in
-  Pkg.describe "ReasonNativeProject"~build ~change_logs:[] ~licenses:[] ~readmes:[] (fun c ->
+  Pkg.describe "ReasonNativeProject" ~build ~change_logs:[] ~licenses:[] ~readmes:[] (fun c ->
     Ok [
       Pkg.lib "pkg/META";
       Pkg.bin ~auto:true ~dst:"test" "src/test";
