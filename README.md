@@ -4,8 +4,6 @@ Installation of [`Reason`](http://facebook.github.io/reason/) project for native
 
 [More info on the workflow](http://facebook.github.io/reason/nativeWorkflow.html).
 
-**Requirements**: [OPAM](https://opam.ocaml.org), the OCaml package manager.
-
 [![Build Status](https://travis-ci.org/reasonml/ReasonNativeProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonNativeProject)
 
 ## Install
