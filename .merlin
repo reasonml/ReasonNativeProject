@@ -1,3 +1,6 @@
-PKG topkg reason
-B ./_build/src
-S ./src
+# This is a Merlin configuration file that enables your editor integration
+# https://github.com/ocaml/merlin/wiki/project-configuration
+
+PKG topkg reason # the OPAM packages
+B ./_build/src # built artifacts location
+S ./src # source location
