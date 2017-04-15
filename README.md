@@ -11,6 +11,8 @@ Installation of [`Reason`](http://facebook.github.io/reason/) project for native
 Clone the repo and install the dependencies:
 
 ```sh
+opam switch 4.03.0
+eval $(opam config env)
 git clone https://github.com/reasonml/ReasonNativeProject.git
 cd ReasonNativeProject
 # opam will read into the `opam` file and add the other dependencies
