@@ -30,18 +30,17 @@ make clean    # clean the compiled artifacts
 A single test file `./src/test.re` is included. Make a simple change to it and
 then run the commands above to see it effect the output.
 
-The built output is in `_build`. Try running it with `_build/src/test.native`.
+The built output is in `_build` but the final binary is symlinked `_build/src/index.native -> index.native`.
 
 ## Developing Your Project
 
-`ReasonNativeProject` is meant to be the starting point of your own project. You'll
-want to make use of existing libraries in your app, so browse the growing set
-of `opam` packages in the [opam repository](http://opam.ocaml.org/packages/).
+`ReasonNativeProject` is meant to be the starting point of your own project. You'll want to make use of existing libraries in your app, so browse the growing set of `opam` packages in the [opam repository](http://opam.ocaml.org/packages/).
 
 ##### Add Another Dependency
 
-Edit your `opam` file so that you depend on a particular opam package and range
-of versions.
+While developing you can simply modify the `_tags` file which is what `rebuild uses to figure out what you depend on. See inside that file for more instructions.
+
+Before publishing onto opam you'll need to edit your `opam` file so that you depend on a particular opam package and range of versions.
 
 In addition you may have to tweak the buildstep to recognize the dependency, by changing `build.ml` within the `pkg` folder. and add the following for you dependency:
 ```ocaml
@@ -65,6 +64,4 @@ See the [OPAM instructions](https://opam.ocaml.org/doc/Packaging.html).
 
 ## Troubleshooting
 
-In general, if something goes wrong, try upgrading your install of the project
-by running `opam upgrade ReasonNativeProject`, or if it failed to install and you
-later fixed it, `opam install ReasonNativeProject`.
+In general, if something goes wrong, try upgrading your install of the project by running `opam upgrade ReasonNativeProject`, or if it failed to install and you later fixed it, `opam install ReasonNativeProject`.
