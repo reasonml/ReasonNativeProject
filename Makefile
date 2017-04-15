@@ -1,9 +1,9 @@
-# topkg (https://github.com/dbuenzli/topkg) is a small native packager for your lib
-# http://erratique.ch/software/topkg/doc/Topkg.html#basics
+# This example project uses rebuild, which is a simple wrapper around
+# ocamlbuild.
+# Docs: https://github.com/ocaml/ocamlbuild/blob/master/manual/manual.adoc
+
 build:
-	cp pkg/META.in pkg/META
-	ocamlbuild -package topkg pkg/build.native
-	./build.native build
+	rebuild -use-ocamlfind src/index.native
 
 # some boilerplate to publish a new version to GitHub
 release:
@@ -14,6 +14,6 @@ release:
 	git push "git@github.com:reasonml/ReasonNativeProject.git" tag $(version)
 
 clean:
-	ocamlbuild -clean
+	rm -rf _build
 
 .PHONY: build release
