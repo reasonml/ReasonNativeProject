@@ -15,5 +15,6 @@ release:
 
 clean:
 	rm -rf _build
+	rm index.native
 
 .PHONY: build release
