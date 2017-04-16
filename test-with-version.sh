@@ -10,5 +10,5 @@ eval `opam config env`
 opam update
 opam pin add -y ReasonNativeProject .
 make
-./test.native
+./index.native
 git diff --exit-code

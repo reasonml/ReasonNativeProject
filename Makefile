@@ -14,7 +14,6 @@ release:
 	git push "git@github.com:reasonml/ReasonNativeProject.git" tag $(version)
 
 clean:
-	rm -rf _build
-	rm index.native
+	rm -rf _build index.native
 
 .PHONY: build release
