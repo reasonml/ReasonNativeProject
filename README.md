@@ -42,6 +42,22 @@ of `opam` packages in the [opam repository](http://opam.ocaml.org/packages/).
 Edit your `opam` file so that you depend on a particular opam package and range
 of versions.
 
+In addition you may have to tweak the buildstep to recognize the dependency, by changing `build.ml` within the `pkg` folder. and add the following for you dependency:
+```ocaml
+...
+OS.Cmd.run @@ Cmd.(
+  ocamlbuild % "-use-ocamlfind"
+              %% (v "-I" % "src")
+              %% (v "-pkg" % "[PACKAGE]") (* <---- only change is this line*)
+              %% of_list files)
+...
+```
+
+Finally For your editor to pick up the dependency and fancy autocomplete etc. make sure to add the package in your `.merlin` file:
+```ocaml
+PKG topkg reason [PACKAGE]
+```
+
 ### Creating Libraries
 
 See the [OPAM instructions](https://opam.ocaml.org/doc/Packaging.html).
