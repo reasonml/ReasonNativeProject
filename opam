@@ -12,7 +12,6 @@ doc: "https://reasonml.github.io/ReasonNativeProject/"
 bug-reports: "https://github.com/reasonml/ReasonNativeProject/issues"
 dev-repo: "git://github.com/reasonml/ReasonNativeProject.git"
 tags: [ "reason" "example" ]
-substs: [ "pkg/META" ]
 build: [
   [make "build"]
 ]
