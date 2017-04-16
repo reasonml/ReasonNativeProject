@@ -1,0 +1,4 @@
+# ReasonNativeProject
+
+bin: [
+  "_build/src/index.native" {"index"} ]
