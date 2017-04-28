@@ -13,6 +13,7 @@ Clone the repo and install the dependencies:
 ```sh
 git clone https://github.com/reasonml/ReasonNativeProject.git
 cd ReasonNativeProject
+opam update # get the latest opam packages data. Skip this optionally
 # opam will read into the `opam` file and add the other dependencies
 opam pin add -y ReasonNativeProject .
 ```
