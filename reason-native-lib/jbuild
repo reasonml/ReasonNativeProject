@@ -1,0 +1,6 @@
+(jbuild_version 1)
+
+(library
+ ((name reason_native_lib)
+  (public_name reason-native-project)
+  (libraries (re))))
