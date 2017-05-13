@@ -17,5 +17,5 @@ _build/**
 *.byte
 *.install
 pkg/META
-
+.merlin
 /node_modules/
