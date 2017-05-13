@@ -17,7 +17,6 @@ build: [
 ]
 depends: [
   "jbuilder" {build}
-  "reason-native-lib"
   "reason"  {= "1.13.3"}
 ]
 available: [ ocaml-version >= "4.02" & ocaml-version < "4.05" ]
