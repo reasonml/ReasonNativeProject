@@ -1,7 +1,6 @@
 (jbuild_version 1)
 
 (executable
- ((libraries (internal_lib reason-native-lib))
-  (package reason-native-project)
+ ((libraries (internal_lib reason-native-project))
   (name test)
   (public_name react_native_project)))
