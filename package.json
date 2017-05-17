@@ -17,5 +17,6 @@
     "dependencies": {
       "reason": "build & >=  \"1.13.3\""
     }
-  }
+  },
+  "license": "BSD"
 }
