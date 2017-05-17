@@ -1,4 +1,12 @@
 # ReasonNativeProject
 
-bin: [
-  "_build/src/index.native" {"index"} ]
+lib: [
+  "./META" {"META"}
+  "./opam" {"opam"}
+  "_build/src/ReasonNativeProject.a" {"ReasonNativeProject.a"}
+  "_build/src/ReasonNativeProject.cma" {"ReasonNativeProject.cma"}
+  "_build/src/ReasonNativeProject.cmi" {"ReasonNativeProject.cmi"}
+  "_build/src/ReasonNativeProject.cmo" {"ReasonNativeProject.cmo"}
+  "_build/src/ReasonNativeProject.cmx" {"ReasonNativeProject.cmx"}
+  "_build/src/ReasonNativeProject.cmxa" {"ReasonNativeProject.cmxa"}
+  "_build/src/ReasonNativeProject.o" {"ReasonNativeProject.o"} ]

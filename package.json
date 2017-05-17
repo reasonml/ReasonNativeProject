@@ -1,0 +1,21 @@
+{
+  "name": "ReasonNativeProject",
+  "version": "0.0.1",
+  "description": "My reason example project.",
+  "author": "FirstName LastName <email@email.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reasonml/ReasonNativeProject.git"
+  },
+  "scripts": {
+    "release": "opam_of_packagejson -gen-meta -gen-opam -gen-install package.json && opam publish"
+  },
+  "devDependencies": {
+    "opam_of_packagejson": "*"
+  },
+  "opam": {
+    "dependencies": {
+      "reason": "build & >=  \"1.13.3\""
+    }
+  }
+}
