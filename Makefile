@@ -2,8 +2,14 @@
 # ocamlbuild.
 # Docs: https://github.com/ocaml/ocamlbuild/blob/master/manual/manual.adoc
 
+all: byte library
+
+byte:
+	rebuild -use-ocamlfind src/ReasonNativeProject.byte
+
 build:
-	rebuild -use-ocamlfind src/index.native
+	rebuild -use-ocamlfind src/ReasonNativeProject.cma
+	rebuild -use-ocamlfind src/ReasonNativeProject.cmxa
 
 # some boilerplate to publish a new version to GitHub
 release:
@@ -15,6 +21,6 @@ release:
 	git push "git@github.com:reasonml/ReasonNativeProject.git" tag $(version)
 
 clean:
-	rm -rf _build index.native
+	rm -rf _build ReasonNativeProject.byte
 
 .PHONY: build release
