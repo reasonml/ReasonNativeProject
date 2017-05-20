@@ -7,6 +7,7 @@ build:
 
 # some boilerplate to publish a new version to GitHub
 release:
+	opam_of_packagejson.exe -gen-meta -gen-opam -gen-install package.json
 	git add package.json opam
 	git commit -m "Version $(version)"
 	git tag -a $(version) -m "Version $(version)."

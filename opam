@@ -1,10 +1,14 @@
 opam-version: "1.2"
+name: "ReasonNativeProject"
 version: "0.0.1"
 license: "BSD"
 dev-repo: "https://github.com/reasonml/ReasonNativeProject.git"
+homepage: "https://github.com/reasonml/ReasonNativeProject"
+bug-reports: "https://github.com/reasonml/ReasonNativeProject/issues"
 maintainer: "FirstName LastName <email@email.com>"
 authors: [ "FirstName LastName <email@email.com>" ]
 depends: [
+  "opam_of_packagejson" { build & >= "0.1.2" }
   "reason" { build & >=  "1.13.3" }
 ]
 build: [

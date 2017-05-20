@@ -40,22 +40,15 @@ The built output is in `_build` but the final binary is symlinked `_build/src/in
 
 While developing you can simply modify the `_tags` file which is what `rebuild uses to figure out what you depend on. See inside that file for more instructions.
 
-Before publishing onto opam you'll need to edit your `opam` file so that you depend on a particular opam package and range of versions.
+##### Releasing
 
-In addition you may have to tweak the buildstep to recognize the dependency, by changing `build.ml` within the `pkg` folder. and add the following for you dependency:
-```ocaml
-...
-OS.Cmd.run @@ Cmd.(
-  ocamlbuild % "-use-ocamlfind"
-              %% (v "-I" % "src")
-              %% (v "-pkg" % "[PACKAGE]") (* <---- only change is this line*)
-              %% of_list files)
-...
-```
+Before publishing onto all you'll need to do is run `make release` to generate all of the files necessary for opam. Then you can follow the steps [here](https://opam.ocaml.org/doc/Packaging.html#GettingafullOPAMpackage).
+
+If you've added extra opam dependencies you'll need to update the package.json under `opam > dependencies`. You can see all of the possible fields you can tweak on the [opam_of_packagejson](https://github.com/bsansouci/opam_of_packagejson) github.
 
 Finally For your editor to pick up the dependency and fancy autocomplete etc. make sure to add the package in your `.merlin` file:
 ```ocaml
-PKG topkg reason [PACKAGE]
+PKG reason [PACKAGE]
 ```
 
 ### Creating Libraries

@@ -8,14 +8,12 @@
     "url": "https://github.com/reasonml/ReasonNativeProject.git"
   },
   "scripts": {
-    "release": "opam_of_packagejson -gen-meta -gen-opam -gen-install package.json && opam publish"
-  },
-  "devDependencies": {
-    "opam_of_packagejson": "*"
+    "release": "make release"
   },
   "opam": {
     "dependencies": {
-      "reason": "build & >=  \"1.13.3\""
+      "reason": "build & >=  \"1.13.3\"",
+      "opam_of_packagejson": "build & >= \"0.1.2\""
     }
   },
   "license": "BSD"
