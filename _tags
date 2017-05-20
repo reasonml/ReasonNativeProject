@@ -1,1 +1,7 @@
 <node_modules>: -traverse
+
+
+# To add opam dependencies you can comment out the line below and list however
+# many deps like: package(unix), package(lwt), package(whateverelse)
+#
+# true: package(unix)

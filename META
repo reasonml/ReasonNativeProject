@@ -1,0 +1,5 @@
+version = "0.0.1"
+description = "My reason example project."
+
+archive(byte) = "ReasonNativeProject.cma"
+archive(native) = "ReasonNativeProject.cmxa"

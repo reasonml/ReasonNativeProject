@@ -1,23 +1,17 @@
 opam-version: "1.2"
 name: "ReasonNativeProject"
 version: "0.0.1"
-maintainer: "Jordan Walke <jordojw@gmail.com>"
-authors: [
-  "Jordan Walke <jordojw@gmail.com>"
-  "Maxwell Bernstein <max@bernsteinbear.com>"
-]
 license: "BSD"
+dev-repo: "https://github.com/reasonml/ReasonNativeProject.git"
 homepage: "https://github.com/reasonml/ReasonNativeProject"
-doc: "https://reasonml.github.io/ReasonNativeProject/"
 bug-reports: "https://github.com/reasonml/ReasonNativeProject/issues"
-dev-repo: "git://github.com/reasonml/ReasonNativeProject.git"
-tags: [ "reason" "example" ]
-substs: [ "pkg/META" ]
-build: [
-  [make "build"]
-]
+maintainer: "FirstName LastName <email@email.com>"
+authors: [ "FirstName LastName <email@email.com>" ]
 depends: [
-  "topkg"   {>=  "0.8.1" & < "0.9"}
-  "reason"  {= "1.13.3"}
+  "opam_of_packagejson" { build & >= "0.1.2" }
+  "reason" { build & >=  "1.13.3" }
+]
+build: [
+  [ make "build" ]
 ]
 available: [ ocaml-version >= "4.02" & ocaml-version < "4.05" ]

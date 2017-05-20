@@ -1,0 +1,20 @@
+{
+  "name": "ReasonNativeProject",
+  "version": "0.0.1",
+  "description": "My reason example project.",
+  "author": "FirstName LastName <email@email.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reasonml/ReasonNativeProject.git"
+  },
+  "scripts": {
+    "release": "make release"
+  },
+  "opam": {
+    "dependencies": {
+      "reason": "build & >=  \"1.13.3\"",
+      "opam_of_packagejson": "build & >= \"0.1.2\""
+    }
+  },
+  "license": "BSD"
+}
