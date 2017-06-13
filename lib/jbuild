@@ -3,5 +3,5 @@
 (library
  ((name lib)
   ; this will be exported & installable as a library via OPAM
-  (public_name reason_native_project)
+  (public_name ReasonNativeProject)
   (libraries (re))))
