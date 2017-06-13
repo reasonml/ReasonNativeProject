@@ -6,7 +6,7 @@ let msg = "Hello Reason!";
 print_string msg;
 print_newline ();
 print_string "!!!!!!\n";
-print_endline Internal.M2.z;
+print_endline Internal.GoodValues.message;
 
-let a = Lib.M1.answer;
+let a = Lib.LifeTheUniverseAndEverything.answer;
 Printf.printf "Answer: %d\n" a
