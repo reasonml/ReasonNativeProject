@@ -1,0 +1,8 @@
+(jbuild_version 1)
+
+(executable
+ ((name test)
+  ; This will be installable as a global binary via opam
+  (public_name react_native_project)
+  ; and it depends on 2 local libraries
+  (libraries (internal_lib reason-native-project))))
