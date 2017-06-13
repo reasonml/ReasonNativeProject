@@ -2,7 +2,7 @@ build:
 	jbuilder build
 
 run: build
-	./_build/install/default/bin/react_native_project
+	./_build/install/default/bin/reason_native_project
 
 test:
 	jbuilder runtest
