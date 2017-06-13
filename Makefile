@@ -1,6 +1,9 @@
 build:
 	jbuilder build
 
+run: build
+	./_build/install/default/bin/react_native_project
+
 test:
 	jbuilder runtest
 
