@@ -3,3 +3,5 @@
 let opt = Re.opt
 
 let format = "OCaml"
+
+let calculate x = x * 2
