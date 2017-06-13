@@ -1,7 +1,7 @@
 (jbuild_version 1)
 
 (library
- ((name reason_native_lib)
+ ((name lib)
   ; this will be exported & installable as a library via OPAM
   (public_name reason_native_project)
   (libraries (re))))

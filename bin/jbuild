@@ -2,7 +2,7 @@
 
 (executable
  ((name test)
-  ; This will be installable as a global binary via opam
+  ; This will be installable as a global binary
   (public_name reason_native_project)
   ; and it depends on 2 local libraries
-  (libraries (internal_lib reason_native_project))))
+  (libraries (lib internal))))
