@@ -2,6 +2,8 @@
 
 ;; why is this lib internal?
 ;; because it doesn't have a public_name
+;; so it won't be exposed to opam as an
+;; installable/distributable library
 (library
- ((name internal_lib)
+ ((name internal)
   (libraries (re))))
