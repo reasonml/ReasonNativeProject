@@ -18,5 +18,6 @@ build: [
 depends: [
   "jbuilder" {build}
   "reason"  {= "2.0.0"}
+  "re"
 ]
 available: [ ocaml-version >= "4.02" & ocaml-version < "4.05" ]
