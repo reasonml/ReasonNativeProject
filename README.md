@@ -1,8 +1,8 @@
 # ReasonNativeProject
 
-Installation of [`Reason`](http://facebook.github.io/reason/) project for native compilation development.
+Installation of [`Reason`](http://reasonml.github.io/) project for native compilation development.
 
-[More info on the workflow](http://facebook.github.io/reason/nativeWorkflow.html).
+[More info on the workflow](https://reasonml.github.io/guide/native).
 
 [![Build Status](https://travis-ci.org/reasonml/ReasonNativeProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonNativeProject)
 
