@@ -11,6 +11,8 @@ Installation of [`Reason`](http://reasonml.github.io/) project for native compil
 Clone the repo and install the dependencies:
 
 ```sh
+opam switch 4.03.0
+eval $(opam config env)
 git clone https://github.com/reasonml/ReasonNativeProject.git
 cd ReasonNativeProject
 opam update # get the latest opam packages data. Skip this optionally
