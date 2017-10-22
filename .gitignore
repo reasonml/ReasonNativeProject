@@ -1,5 +1,8 @@
 .DS_Store
 _build/**
+_build
+_install/**
+_install
 *~
 *.cmi
 *.exe

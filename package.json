@@ -1,0 +1,22 @@
+{
+  "name": "reason-native-project",
+  "version": "0.0.1",
+  "esy": {
+    "build": [
+      [ "make", "build" ],
+      [ "make", "install" ]
+    ],
+    "buildsInSource": true
+  },
+  "dependencies": {
+    "@opam-alpha/jbuilder": "*",
+    "@opam-alpha/reason": "1.13.*",
+    "@opam-alpha/re": "*"
+  },
+  "peerDependencies": {
+    "ocaml": " >= 4.2.0  < 4.5.0"
+  },
+  "devDependencies": {
+    "ocaml": "esy-ocaml/ocaml#4.2.3+esy"
+  }
+}

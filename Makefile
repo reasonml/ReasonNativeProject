@@ -1,8 +1,13 @@
 build:
-	jbuilder build
+	# jbuilder requires at least a dummy opam file.
+	touch reason-native-project.opam
+	jbuilder build -p reason-native-project -j 4
 
 run: build
 	./_build/install/default/bin/reason-native-bin
+
+install: build
+	jbuilder install --prefix=$$cur__install
 
 test:
 	jbuilder runtest
@@ -16,6 +21,6 @@ release:
 	git push "git@github.com:reasonml/ReasonNativeProject.git" tag $(version)
 
 clean:
-	rm -rf _build *.install
+	rm -rf _install _build *.install *.opam
 
 .PHONY: build release test
