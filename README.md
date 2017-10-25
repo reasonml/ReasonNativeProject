@@ -187,11 +187,11 @@ Let's examine the interesting parts of this project's `package.json`:
 ##### Native Dependencies:
 
 This project demonstrates how `esy` allows depending on native packages that
-are hosted on `opam`. The `@opam-alpha` prefix tells `esy install` to
-dynamically fetch these dependencies from the official `opam` service. There is
-no mirror involved - it's pulling from `opam` directly. Once someone pushes a
-package to `opam`, you have immediate access to it from your `package.json` -
-no one needs to convert it to `esy`.
+are hosted on `opam`. The `@opam` prefix tells `esy install` to dynamically
+fetch these dependencies from the official `opam` service. There is no mirror
+involved - it's pulling from `opam` directly. Once someone pushes a package to
+`opam`, you have immediate access to it from your `package.json` - no one needs
+to convert it to `esy`.
 
 ```json
 {
@@ -199,9 +199,9 @@ no one needs to convert it to `esy`.
   "dependencies": {
     "substs": "esy-ocaml/substs",
     "opam-installer-bin": "esy-ocaml/opam-installer-bin",
-    "@opam-alpha/jbuilder": "*",
-    "@opam-alpha/reason": "1.13.*",
-    "@opam-alpha/re": "*"
+    "@opam/jbuilder": "*",
+    "@opam/reason": "1.13.*",
+    "@opam/re": "*"
   },
   ...
 }
