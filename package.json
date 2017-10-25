@@ -9,9 +9,9 @@
     "buildsInSource": true
   },
   "dependencies": {
-    "@opam-alpha/jbuilder": "*",
-    "@opam-alpha/reason": "1.13.*",
-    "@opam-alpha/re": "*"
+    "@opam/jbuilder": "*",
+    "@opam/reason": "1.13.*",
+    "@opam/re": "*"
   },
   "peerDependencies": {
     "ocaml": " >= 4.2.0  < 4.5.0"
