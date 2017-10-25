@@ -22,3 +22,4 @@ _install
 pkg/META
 .merlin
 /node_modules/
+reason-native-project.opam
