@@ -23,3 +23,6 @@ pkg/META
 .merlin
 /node_modules/
 reason-native-project.opam
+yarn-error.log
+_esybuild
+_esyinstall
