@@ -17,6 +17,6 @@
     "ocaml": " >= 4.2.0  < 4.5.0"
   },
   "devDependencies": {
-    "ocaml": "esy-ocaml/ocaml#4.2.3+esy"
+    "ocaml": "~4.2.3001"
   }
 }
