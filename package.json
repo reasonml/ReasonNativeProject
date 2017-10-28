@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@opam/jbuilder": "*",
-    "@opam/reason": "1.13.*",
+    "@opam/reason": "https://github.com/facebook/reason/archive/3.0.0.tar.gz",
     "@opam/re": "*"
   },
   "peerDependencies": {
