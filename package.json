@@ -3,20 +3,28 @@
   "version": "0.0.1",
   "esy": {
     "build": [
-      [ "make", "build" ],
-      [ "make", "install" ]
+      [
+        "make",
+        "build"
+      ],
+      [
+        "make",
+        "install"
+      ]
     ],
     "buildsInSource": true
   },
   "dependencies": {
     "@opam/jbuilder": "*",
-    "@opam/reason": "https://github.com/facebook/reason/archive/3.0.0.tar.gz",
-    "@opam/re": "*"
+    "@opam/re": "*",
+    "@opam/reason": "^3.0.0"
   },
   "peerDependencies": {
-    "ocaml": " >= 4.2.0  < 4.5.0"
+    "ocaml": " >= 4.2.0  < 4.5.0",
+    "@opam/merlin": "2.5.4"
   },
   "devDependencies": {
-    "ocaml": "~4.2.3001"
+    "ocaml": "~4.2.3001",
+    "@opam/merlin": "2.5.4"
   }
 }

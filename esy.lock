@@ -41,6 +41,19 @@
   peerDependencies:
     ocaml "*"
 
+"@opam/biniou@ >= 1.2.0":
+  version "1.2.0"
+  uid "05460293c64f09fbf614494aaa3d70be"
+  resolved "@opam/biniou@1.2.0-05460293c64f09fbf614494aaa3d70be.tgz"
+  dependencies:
+    "@esy-ocaml/esy-installer" "^0.0.0"
+    "@esy-ocaml/substs" "^0.0.1"
+    "@opam/conf-which" ""
+    "@opam/easy-format" "*"
+    "@opam/jbuilder" ""
+  peerDependencies:
+    ocaml " >= 4.2.3"
+
 "@opam/camlp4@*":
   version "4.2.0-7"
   uid b0a02b88304864931d4deed04d4eecae
@@ -99,7 +112,18 @@
   peerDependencies:
     ocaml "*"
 
-"@opam/jbuilder@  >= 1.0.0-beta10", "@opam/jbuilder@  >= 1.0.0-beta7", "@opam/jbuilder@  >= 1.0.0-beta9", "@opam/jbuilder@*":
+"@opam/easy-format@*":
+  version "1.3.0"
+  uid b843ad9c32a3dcd29e70c32b3b060420
+  resolved "@opam/easy-format@1.3.0-b843ad9c32a3dcd29e70c32b3b060420.tgz"
+  dependencies:
+    "@esy-ocaml/esy-installer" "^0.0.0"
+    "@esy-ocaml/substs" "^0.0.1"
+    "@opam/jbuilder" ""
+  peerDependencies:
+    ocaml " >= 4.2.3"
+
+"@opam/jbuilder@", "@opam/jbuilder@  >= 1.0.0-beta10", "@opam/jbuilder@  >= 1.0.0-beta7", "@opam/jbuilder@  >= 1.0.0-beta9", "@opam/jbuilder@*":
   version "1.0.0-beta14"
   uid "117999132e6d500bc19773197efa59bb"
   resolved "@opam/jbuilder@1.0.0-beta14-117999132e6d500bc19773197efa59bb.tgz"
@@ -180,6 +204,18 @@
   peerDependencies:
     ocaml " >= 4.2.3"
 
+"@opam/merlin@2.5.4":
+  version "2.5.4"
+  uid "56a758ce289c7a69f4ad49cd0efd632f"
+  resolved "@opam/merlin@2.5.4-56a758ce289c7a69f4ad49cd0efd632f.tgz"
+  dependencies:
+    "@esy-ocaml/esy-installer" "^0.0.0"
+    "@esy-ocaml/substs" "^0.0.1"
+    "@opam/ocamlfind" " >= 1.5.2"
+    "@opam/yojson" "*"
+  peerDependencies:
+    ocaml " >= 4.2.1  < 4.5.0"
+
 "@opam/ocaml-migrate-parsetree@ >= 0.7.0", "@opam/ocaml-migrate-parsetree@*":
   version "1.0.6"
   uid "1bf70abb65426fc1bf81294a31102782"
@@ -203,7 +239,7 @@
   peerDependencies:
     ocaml "<4.3.0"
 
-"@opam/ocamlfind@", "@opam/ocamlfind@  >= 1.5.0", "@opam/ocamlfind@  >= 1.6.1", "@opam/ocamlfind@ >= 1.5.0", "@opam/ocamlfind@ >= 1.5.3", "@opam/ocamlfind@ >= 1.7.2", "@opam/ocamlfind@*":
+"@opam/ocamlfind@", "@opam/ocamlfind@  >= 1.5.0", "@opam/ocamlfind@  >= 1.6.1", "@opam/ocamlfind@ >= 1.5.0", "@opam/ocamlfind@ >= 1.5.2", "@opam/ocamlfind@ >= 1.5.3", "@opam/ocamlfind@ >= 1.7.2", "@opam/ocamlfind@*":
   version "1.7.3"
   uid "62c60678cfc5ed0f4cd0a77792bc6b20"
   resolved "@opam/ocamlfind@1.7.3-62c60678cfc5ed0f4cd0a77792bc6b20.tgz"
@@ -266,9 +302,10 @@
   peerDependencies:
     ocaml " >= 4.1.0"
 
-"@opam/reason@https://github.com/facebook/reason/archive/3.0.0.tar.gz":
+"@opam/reason@^3.0.0":
   version "3.0.0"
-  resolved "https://github.com/facebook/reason/archive/3.0.0.tar.gz#6bca0f0c703b80ebb10ef3da6f4ead36ad3901a0"
+  uid c1355c5cbeeac7710e430a7f3386636e
+  resolved "@opam/reason@3.0.0-c1355c5cbeeac7710e430a7f3386636e.tgz"
   dependencies:
     "@esy-ocaml/esy-installer" "^0.0.0"
     "@esy-ocaml/substs" "^0.0.1"
@@ -322,6 +359,20 @@
     "@opam/react" " >= 1.0.0"
   peerDependencies:
     ocaml " >= 4.2.3  < 4.6.0"
+
+"@opam/yojson@*":
+  version "1.4.0"
+  uid d35a3e0fd21c07a665967de3acf4b450
+  resolved "@opam/yojson@1.4.0-d35a3e0fd21c07a665967de3acf4b450.tgz"
+  dependencies:
+    "@esy-ocaml/esy-installer" "^0.0.0"
+    "@esy-ocaml/substs" "^0.0.1"
+    "@opam/biniou" " >= 1.2.0"
+    "@opam/cppo" ""
+    "@opam/easy-format" "*"
+    "@opam/jbuilder" ""
+  peerDependencies:
+    ocaml " >= 4.2.3"
 
 "@opam/zed@ >= 1.2.0":
   version "1.5.0"
