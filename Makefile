@@ -7,7 +7,7 @@ run: build
 	./_build/install/default/bin/reason-native-bin
 
 install: build
-	jbuilder install --prefix=$$cur__install
+	esy-installer
 
 test:
 	jbuilder runtest
