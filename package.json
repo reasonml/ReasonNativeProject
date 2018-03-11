@@ -1,0 +1,32 @@
+{
+  "name": "reason-native-project",
+  "version": "0.0.1",
+  "description": "Reason native project",
+  "NOTE": "This package.json is just a duplication of the opam file. It's here so that you can try building this project with 'esy'.",
+  "NOTE2": "  'esy' is not yet ready for widespread use, but including this package.json so that you can use esy instead of opam.",
+  "license": "MIT",
+  "esy": {
+    "build": [
+      ["refmterr", "jbuilder", "build"]
+    ],
+    "install": [
+      "esy-installer"
+    ],
+    "buildsInSource": "_build"
+  },
+  "dependencies": {
+    "@esy-ocaml/esy-installer": "^0.0.0",
+    "@opam/jbuilder": "*",
+    "@esy-ocaml/reason": "^3.0.0",
+    "@opam/re": "*",
+    "refmterr": "^3.0.4"
+  },
+  "peerDependencies": {
+    "ocaml": "~4.6.0"
+  },
+  "devDependencies": {
+    "@esy-ocaml/merlin": "3.0.5003",
+    "ocaml": "~4.6.0"
+  }
+}
+
