@@ -15,9 +15,9 @@ Clone the repo and run these commands from within the project:
 ```sh
 opam update # get the latest opam packages data. Skip this optionally
 # opam will read into the `opam` file and add the other dependencies
-opam add reason
-opam add merlin
-opam add re
+opam install reason
+opam install merlin
+opam install re
 make build    # build/rebuild your files
 ```
 
