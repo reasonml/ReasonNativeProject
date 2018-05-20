@@ -2,7 +2,7 @@
 
 [`Reason`](http://reasonml.github.io/) project for native compilation:
 
-[More info on the workflow](https://reasonml.github.io/guide/native).
+[More info on the workflow](https://reasonml.github.io/docs/en/native.html).
 
 [![Build Status](https://travis-ci.org/reasonml/ReasonNativeProject.svg?branch=master)](https://travis-ci.org/reasonml/ReasonNativeProject)
 
