@@ -1,0 +1,8 @@
+
+(library
+ (name lib)
+ ; this will be exported & installable as a library via OPAM
+ (public_name ReasonNativeProject)
+ (libraries re))
+
+(include_subdirs unqualified)

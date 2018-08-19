@@ -1,3 +1,3 @@
 
 let answer = 42;
-let nested = Sub.Nested.value;
+let nested = Nested.value;
