@@ -1,4 +1,9 @@
+# !DEPRECATED! Use [hello-reason](https://github.com/esy-ocaml/hello-reason) instead
+
+Original README below:
+
 # ReasonNativeProject
+
 
 [`Reason`](http://reasonml.github.io/) project for native compilation:
 
