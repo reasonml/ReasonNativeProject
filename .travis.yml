@@ -4,7 +4,7 @@ before_install:
   - brew update
   - brew install opam
   - opam init
-  - opam switch "$OCAML_VERSION"
+  - opam switch create "$OCAML_VERSION"
   - eval `opam config env`
   - opam update
   - opam install -y re
