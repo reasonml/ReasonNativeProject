@@ -7,10 +7,11 @@ before_install:
   - opam switch "$OCAML_VERSION"
   - eval `opam config env`
   - opam update
+  - opam install -y re
 before_script:
   - opam pin add -y ReasonNativeProject .
 script:
-  - ./test-with-version.sh "$OCAML_VERSION"
+  - make run
   - git diff --exit-code
 env:
   - OCAML_VERSION=4.02.3
